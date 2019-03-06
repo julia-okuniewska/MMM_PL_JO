@@ -20,6 +20,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
@@ -48,6 +49,7 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_4;
     QLineEdit *lineEdit_4;
+    QTextBrowser *transmitationWindow;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -61,7 +63,7 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         graphicsView = new QGraphicsView(centralWidget);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
-        graphicsView->setGeometry(QRect(20, 140, 1111, 451));
+        graphicsView->setGeometry(QRect(30, 220, 1121, 401));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setGeometry(QRect(20, 10, 471, 111));
@@ -134,6 +136,9 @@ public:
 
         horizontalLayout_4->addWidget(lineEdit_4);
 
+        transmitationWindow = new QTextBrowser(centralWidget);
+        transmitationWindow->setObjectName(QString::fromUtf8("transmitationWindow"));
+        transmitationWindow->setGeometry(QRect(20, 140, 471, 61));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
