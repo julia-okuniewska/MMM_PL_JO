@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>220</y>
+      <y>230</y>
       <width>1121</width>
       <height>401</height>
      </rect>
@@ -104,7 +104,7 @@
     <property name="geometry">
      <rect>
       <x>780</x>
-      <y>20</y>
+      <y>0</y>
       <width>371</width>
       <height>191</height>
      </rect>
@@ -118,7 +118,7 @@
        <x>40</x>
        <y>20</y>
        <width>301</width>
-       <height>171</height>
+       <height>182</height>
       </rect>
      </property>
      <layout class="QFormLayout" name="formLayout">
@@ -156,20 +156,6 @@
         </item>
        </layout>
       </item>
-      <item row="1" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
-        <item>
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>b0 = </string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEdit_3"/>
-        </item>
-       </layout>
-      </item>
       <item row="1" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_9">
         <item>
@@ -181,6 +167,20 @@
         </item>
         <item>
          <widget class="QLineEdit" name="lineEdit_8"/>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>b0 = </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_3"/>
         </item>
        </layout>
       </item>
@@ -211,6 +211,16 @@
      </rect>
     </property>
    </widget>
+   <widget class="QTextBrowser" name="remarks">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>190</y>
+      <width>301</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -218,7 +228,7 @@
      <x>0</x>
      <y>0</y>
      <width>1191</width>
-     <height>20</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
