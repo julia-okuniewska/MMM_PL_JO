@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -32,20 +33,26 @@ public:
     QWidget *centralWidget;
     QGraphicsView *graphicsView;
     QGroupBox *groupBox;
-    QPushButton *pushButton_3;
+    QWidget *horizontalLayoutWidget_3;
+    QHBoxLayout *horizontalLayout_3;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
     QGroupBox *groupBox_2;
-    QWidget *horizontalLayoutWidget_2;
-    QHBoxLayout *horizontalLayout_2;
-    QLabel *label_2;
-    QLineEdit *lineEdit_2;
-    QWidget *horizontalLayoutWidget;
+    QWidget *formLayoutWidget;
+    QFormLayout *formLayout;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
     QLineEdit *lineEdit;
-    QGroupBox *groupBox_3;
-    QWidget *horizontalLayoutWidget_4;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label_2;
+    QLineEdit *lineEdit_2;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_3;
+    QLineEdit *lineEdit_3;
+    QHBoxLayout *horizontalLayout_9;
+    QLabel *label_8;
+    QLineEdit *lineEdit_8;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_4;
     QLineEdit *lineEdit_4;
@@ -66,79 +73,131 @@ public:
         graphicsView->setGeometry(QRect(30, 220, 1121, 401));
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(20, 10, 471, 111));
-        pushButton_3 = new QPushButton(groupBox);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        pushButton_3->setGeometry(QRect(310, 30, 131, 71));
-        pushButton = new QPushButton(groupBox);
+        groupBox->setGeometry(QRect(20, 10, 471, 100));
+        groupBox->setMinimumSize(QSize(0, 100));
+        groupBox->setMaximumSize(QSize(16777215, 100));
+        horizontalLayoutWidget_3 = new QWidget(groupBox);
+        horizontalLayoutWidget_3->setObjectName(QString::fromUtf8("horizontalLayoutWidget_3"));
+        horizontalLayoutWidget_3->setGeometry(QRect(0, 20, 471, 71));
+        horizontalLayout_3 = new QHBoxLayout(horizontalLayoutWidget_3);
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
+        pushButton = new QPushButton(horizontalLayoutWidget_3);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(30, 30, 131, 71));
-        pushButton_2 = new QPushButton(groupBox);
+        pushButton->setMinimumSize(QSize(0, 60));
+
+        horizontalLayout_3->addWidget(pushButton);
+
+        pushButton_2 = new QPushButton(horizontalLayoutWidget_3);
         pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(170, 30, 131, 71));
+        pushButton_2->setMinimumSize(QSize(0, 60));
+
+        horizontalLayout_3->addWidget(pushButton_2);
+
+        pushButton_3 = new QPushButton(horizontalLayoutWidget_3);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_3->setMinimumSize(QSize(0, 60));
+
+        horizontalLayout_3->addWidget(pushButton_3);
+
         groupBox_2 = new QGroupBox(centralWidget);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setGeometry(QRect(520, 10, 361, 111));
-        horizontalLayoutWidget_2 = new QWidget(groupBox_2);
-        horizontalLayoutWidget_2->setObjectName(QString::fromUtf8("horizontalLayoutWidget_2"));
-        horizontalLayoutWidget_2->setGeometry(QRect(210, 20, 131, 80));
-        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget_2);
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        label_2 = new QLabel(horizontalLayoutWidget_2);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        horizontalLayout_2->addWidget(label_2);
-
-        lineEdit_2 = new QLineEdit(horizontalLayoutWidget_2);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
-
-        horizontalLayout_2->addWidget(lineEdit_2);
-
-        horizontalLayoutWidget = new QWidget(groupBox_2);
-        horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(10, 20, 131, 80));
-        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
+        groupBox_2->setGeometry(QRect(780, 20, 371, 191));
+        formLayoutWidget = new QWidget(groupBox_2);
+        formLayoutWidget->setObjectName(QString::fromUtf8("formLayoutWidget"));
+        formLayoutWidget->setGeometry(QRect(40, 20, 301, 171));
+        formLayout = new QFormLayout(formLayoutWidget);
+        formLayout->setSpacing(6);
+        formLayout->setContentsMargins(11, 11, 11, 11);
+        formLayout->setObjectName(QString::fromUtf8("formLayout"));
+        formLayout->setLabelAlignment(Qt::AlignCenter);
+        formLayout->setFormAlignment(Qt::AlignCenter);
+        formLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(horizontalLayoutWidget);
+        label = new QLabel(formLayoutWidget);
         label->setObjectName(QString::fromUtf8("label"));
 
         horizontalLayout->addWidget(label);
 
-        lineEdit = new QLineEdit(horizontalLayoutWidget);
+        lineEdit = new QLineEdit(formLayoutWidget);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
 
         horizontalLayout->addWidget(lineEdit);
 
-        groupBox_3 = new QGroupBox(centralWidget);
-        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        groupBox_3->setGeometry(QRect(900, 10, 231, 111));
-        horizontalLayoutWidget_4 = new QWidget(groupBox_3);
-        horizontalLayoutWidget_4->setObjectName(QString::fromUtf8("horizontalLayoutWidget_4"));
-        horizontalLayoutWidget_4->setGeometry(QRect(10, 20, 211, 80));
-        horizontalLayout_4 = new QHBoxLayout(horizontalLayoutWidget_4);
+
+        formLayout->setLayout(0, QFormLayout::LabelRole, horizontalLayout);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        label_2 = new QLabel(formLayoutWidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        horizontalLayout_2->addWidget(label_2);
+
+        lineEdit_2 = new QLineEdit(formLayoutWidget);
+        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
+
+        horizontalLayout_2->addWidget(lineEdit_2);
+
+
+        formLayout->setLayout(0, QFormLayout::FieldRole, horizontalLayout_2);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        label_3 = new QLabel(formLayoutWidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        horizontalLayout_5->addWidget(label_3);
+
+        lineEdit_3 = new QLineEdit(formLayoutWidget);
+        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
+
+        horizontalLayout_5->addWidget(lineEdit_3);
+
+
+        formLayout->setLayout(1, QFormLayout::FieldRole, horizontalLayout_5);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setSpacing(6);
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        label_8 = new QLabel(formLayoutWidget);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        horizontalLayout_9->addWidget(label_8);
+
+        lineEdit_8 = new QLineEdit(formLayoutWidget);
+        lineEdit_8->setObjectName(QString::fromUtf8("lineEdit_8"));
+
+        horizontalLayout_9->addWidget(lineEdit_8);
+
+
+        formLayout->setLayout(1, QFormLayout::LabelRole, horizontalLayout_9);
+
+        horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
-        label_4 = new QLabel(horizontalLayoutWidget_4);
+        label_4 = new QLabel(formLayoutWidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
         horizontalLayout_4->addWidget(label_4);
 
-        lineEdit_4 = new QLineEdit(horizontalLayoutWidget_4);
+        lineEdit_4 = new QLineEdit(formLayoutWidget);
         lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
 
         horizontalLayout_4->addWidget(lineEdit_4);
 
+
+        formLayout->setLayout(2, QFormLayout::LabelRole, horizontalLayout_4);
+
         transmitationWindow = new QTextBrowser(centralWidget);
         transmitationWindow->setObjectName(QString::fromUtf8("transmitationWindow"));
-        transmitationWindow->setGeometry(QRect(20, 140, 471, 61));
+        transmitationWindow->setGeometry(QRect(20, 130, 471, 71));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -160,14 +219,15 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         groupBox->setTitle(QApplication::translate("MainWindow", "pobudzenie u(t) :", nullptr));
-        pushButton_3->setText(QApplication::translate("MainWindow", "sinusoida", nullptr));
         pushButton->setText(QApplication::translate("MainWindow", "fala prostok\304\205tna", nullptr));
         pushButton_2->setText(QApplication::translate("MainWindow", "skok jednostkowy", nullptr));
-        groupBox_2->setTitle(QApplication::translate("MainWindow", "Edycja parametr\303\263w ai", nullptr));
-        label_2->setText(QApplication::translate("MainWindow", "a0 = ", nullptr));
+        pushButton_3->setText(QApplication::translate("MainWindow", "sinusoida", nullptr));
+        groupBox_2->setTitle(QApplication::translate("MainWindow", "Edycja parametr\303\263w transmitancji", nullptr));
         label->setText(QApplication::translate("MainWindow", "a1 = ", nullptr));
-        groupBox_3->setTitle(QApplication::translate("MainWindow", "Edycja parametru op\303\263\305\272nienia transportowego", nullptr));
-        label_4->setText(QApplication::translate("MainWindow", "T = ", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "a0 = ", nullptr));
+        label_3->setText(QApplication::translate("MainWindow", "b0 = ", nullptr));
+        label_8->setText(QApplication::translate("MainWindow", "b1 = ", nullptr));
+        label_4->setText(QApplication::translate("MainWindow", " T =  ", nullptr));
     } // retranslateUi
 
 };
