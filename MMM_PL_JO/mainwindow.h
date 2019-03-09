@@ -6,7 +6,7 @@
 #include<QString>
 
 
-
+# define startPoint 10;
 
 namespace Ui {
 class MainWindow;
@@ -20,11 +20,11 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    int a_0 = 25;
-    int a_1 = 5;
-    int b_0 = 15;
-    int b_1 = 35;
-    int T   = 10;
+    int a_0 = startPoint
+    int a_1 = startPoint
+    int b_0 = startPoint
+    int b_1 = startPoint
+    int T   = startPoint
 
   QString textTransmitation;
 
