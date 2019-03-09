@@ -7,10 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Metody Modelowania Matematycznego - Projekt Lipkiewicz Okuniewska");
-    //ui->transmitationWindow->
+    ui->transmitationWindow->setReadOnly(true);
 
-    createTextTransmitation();
-    ui->transmitationWindow->setText(textTransmitation);
+
+
 
 }
 
@@ -21,10 +21,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::createTextTransmitation()
 {
-    textTransmitation.append("Postać transmitancji H(s) = \n b1s + b0  \n");
+    ui->transmitationWindow->clear();
+    textTransmitation.clear();
+    textTransmitation.append("Postać transmitancji H(s) = \n " + QString::number(b_1) + "s + " + QString::number(b_0) +  "\n");
     textTransmitation.append("------------------- \n");
-    textTransmitation.append("s^2 + " + QString::number(paramA1) + "s + ");
-    textTransmitation.append(QString::number(paramA0));
+    textTransmitation.append("s^2 + " + QString::number(a_1) + "s + ");
+    textTransmitation.append(QString::number(a_0));
+    ui->transmitationWindow->setPlainText(textTransmitation);
 }
 
 void MainWindow::display_remarks()
@@ -54,7 +57,10 @@ void MainWindow::display_remarks()
     ui->remarks->setText(mistake);
 
     if(a_0 != 0 && a_1 != 0 && b_0 != 0 && b_1 != 0 && T!=0)
+
+
         ui->remarks->setText(" ");
+
 }
 
 void MainWindow::on_lineEdit_textChanged()
@@ -63,6 +69,7 @@ void MainWindow::on_lineEdit_textChanged()
     bool convertOK;
     a_1 = a_1_string.toInt(&convertOK);
     display_remarks();
+    createTextTransmitation();
 
 }
 
@@ -72,6 +79,7 @@ void MainWindow::on_lineEdit_2_textChanged()
     bool convertOK;
     a_0 = a_0_string.toInt(&convertOK);
     display_remarks();
+    createTextTransmitation();
 
 }
 
@@ -81,6 +89,7 @@ void MainWindow::on_lineEdit_8_textChanged()
     bool convertOK;
     b_1 = b_1_string.toInt(&convertOK);
     display_remarks();
+    createTextTransmitation();
 }
 
 
@@ -90,6 +99,7 @@ void MainWindow::on_lineEdit_3_textChanged()
     bool convertOK;
     b_0 = b_0_string.toInt(&convertOK);
     display_remarks();
+    createTextTransmitation();
 }
 
 void MainWindow::on_lineEdit_4_textChanged()
@@ -98,4 +108,5 @@ void MainWindow::on_lineEdit_4_textChanged()
     bool convertOK;
     T = T_string.toInt(&convertOK);
     display_remarks();
+    createTextTransmitation();
 }

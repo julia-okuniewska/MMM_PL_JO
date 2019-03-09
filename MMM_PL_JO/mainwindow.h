@@ -20,14 +20,11 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    int paramA1 = 10;
-    int paramA0 = 10;
-    int paramT  = 5;
-    int a_0;
-    int a_1;
-    int b_0;
-    int b_1;
-    int T;
+    int a_0 = 25;
+    int a_1 = 5;
+    int b_0 = 15;
+    int b_1 = 35;
+    int T   = 10;
 
   QString textTransmitation;
 

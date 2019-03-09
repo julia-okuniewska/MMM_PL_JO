@@ -201,16 +201,6 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QTextBrowser" name="transmitationWindow">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>130</y>
-      <width>471</width>
-      <height>71</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QTextBrowser" name="remarks">
     <property name="geometry">
      <rect>
@@ -221,6 +211,16 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPlainTextEdit" name="transmitationWindow">
+    <property name="geometry">
+     <rect>
+      <x>23</x>
+      <y>130</y>
+      <width>621</width>
+      <height>70</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -228,7 +228,7 @@
      <x>0</x>
      <y>0</y>
      <width>1191</width>
-     <height>26</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>
