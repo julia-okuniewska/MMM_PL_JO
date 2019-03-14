@@ -7,6 +7,7 @@
 #include <QButtonGroup>
 #include <QDebug>
 
+#include "olchart.h"
 
 #define startPoint 10;
 
