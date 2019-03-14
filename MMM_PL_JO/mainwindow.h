@@ -3,10 +3,12 @@
 
 #include <QMainWindow>
 #include <string>
-#include<QString>
+#include <QString>
+#include <QButtonGroup>
+#include <QDebug>
 
 
-# define startPoint 10;
+#define startPoint 10;
 
 namespace Ui {
 class MainWindow;
@@ -27,9 +29,13 @@ public:
     int T   = startPoint
 
   QString textTransmitation;
-
+  QString nameOfFunctions[3] = {"fala prostokątna",
+          "skok jednostkowy",
+          "sinusoida"};
     void createTextTransmitation();
     void display_remarks();
+    void prepareButtons();
+
 
 private slots:
     void on_lineEdit_textChanged();
@@ -42,8 +48,18 @@ private slots:
 
     void on_lineEdit_4_textChanged();
 
+    void on_pushButton_clicked();
+
+
+
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
+    QButtonGroup signalsButton;
 };
 
 #endif // MAINWINDOW_H

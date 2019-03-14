@@ -10,7 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->transmitationWindow->setReadOnly(true);
 
 
-
+    prepareButtons();
+    createTextTransmitation();
 
 }
 
@@ -23,11 +24,21 @@ void MainWindow::createTextTransmitation()
 {
     ui->transmitationWindow->clear();
     textTransmitation.clear();
-    textTransmitation.append("Postać transmitancji H(s) = \n " + QString::number(b_1) + "s + " + QString::number(b_0) +  "\n");
-    textTransmitation.append("------------------- \n");
-    textTransmitation.append("s^2 + " + QString::number(a_1) + "s + ");
+
+
+    textTransmitation.append("Postać transmitancji H(s) \t \t funkcja wejściowa to: " );
+    int  id = signalsButton.checkedId();
+    if(id == -1 ) return;
+    textTransmitation.append( signalsButton.button(id)->text());
+
+    textTransmitation.append("\n" + QString::number(b_1) + "s + " + QString::number(b_0) +"\n");
+    textTransmitation.append("-------------------   * exp ( -s * "+QString::number(T));
+    textTransmitation.append(")\n s^2 + " + QString::number(a_1) + "s + ");
     textTransmitation.append(QString::number(a_0));
+
     ui->transmitationWindow->setPlainText(textTransmitation);
+
+
 }
 
 void MainWindow::display_remarks()
@@ -60,6 +71,23 @@ void MainWindow::display_remarks()
 
 
         ui->remarks->setText(" ");
+
+}
+
+void MainWindow::prepareButtons()
+{
+    ui->pushButton->setCheckable(true);
+    ui->pushButton_2->setCheckable(true);
+    ui->pushButton_3->setCheckable(true);
+    signalsButton.addButton(ui->pushButton);
+    signalsButton.addButton(ui->pushButton_2);
+    signalsButton.addButton(ui->pushButton_3);
+
+    //emit on_pushButton_toggled(true);
+    signalsButton.setExclusive(true);
+
+    ui->pushButton->setChecked(true);
+
 
 }
 
@@ -108,5 +136,22 @@ void MainWindow::on_lineEdit_4_textChanged()
     bool convertOK;
     T = T_string.toInt(&convertOK);
     display_remarks();
+    createTextTransmitation();
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    createTextTransmitation();
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    createTextTransmitation();
+}
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
     createTextTransmitation();
 }
