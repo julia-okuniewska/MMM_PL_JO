@@ -11,21 +11,18 @@
 #define zakresX 100
 #define zakresY 50
 
-class olChart : QObject
+class olChart : public QChart
 {
     Q_OBJECT
 public:
     olChart();
-    olChart(QGraphicsView *view);
     void prepareolChart();
     ~olChart();
 
-     QChart *myChart;
+
 private:
 
-    QLineSeries *przebieg;
-    QGraphicsView *view;
-    QGraphicsScene *scene;
+    QLineSeries *przebieg;    
     QPen blackPen;
 };
 

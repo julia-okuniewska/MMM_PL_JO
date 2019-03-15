@@ -31,8 +31,8 @@ public:
 
   QString textTransmitation;
   QString nameOfFunctions[3] = {"fala prostokątna",
-          "skok jednostkowy",
-          "sinusoida"};
+                                "skok jednostkowy",
+                                "sinusoida"};
     void createTextTransmitation();
     void display_remarks();
     void prepareButtons();

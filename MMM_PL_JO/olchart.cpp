@@ -1,19 +1,12 @@
 #include "olchart.h"
 
+
 olChart::olChart()
 {
-
-}
-
-olChart::olChart(QGraphicsView *view)
-{
     blackPen.setColor(Qt::black);
-    this->view = view;
-    scene = new QGraphicsScene(0,0,view->width(), view->height(),view);
 
-    myChart = new QChart();
-    myChart->legend()->hide();
-    przebieg = new QLineSeries();
+   this->legend()->hide();
+   przebieg = new QLineSeries();
 
     for (int i = 0 ;  i < 100 ; i ++)
     {
@@ -21,17 +14,16 @@ olChart::olChart(QGraphicsView *view)
       qDebug()<<przebieg->at(i);
     }
 
-    myChart->addSeries(przebieg);
+   this->addSeries(przebieg);
 
     // wywala odwołanie do pustego
-    myChart->setTitle("Charakterystyka Amplitudowa");
+    this->setTitle("Charakterystyka Amplitudowa");
 //    myChart->axes(Qt::Horizontal).first()->setRange(0, zakresX);
 //    myChart->axes(Qt::Horizontal).first()->setRange(0, zakresY);
 
-    scene->addItem(myChart);
 
-    this->view->setRenderHint(QPainter::Antialiasing);
-    this->view->show();
+  // setRenderHint(QPainter::Antialiasing);
+
 
 }
 
@@ -42,5 +34,5 @@ void olChart::prepareolChart()
 
 olChart::~olChart()
 {
-    delete scene;
+
 }
