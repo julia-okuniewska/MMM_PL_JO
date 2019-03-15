@@ -61,6 +61,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QButtonGroup signalsButton;
+    olChart *olchart;
 };
 
 #endif // MAINWINDOW_H

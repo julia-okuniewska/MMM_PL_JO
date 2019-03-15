@@ -13,7 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
     prepareButtons();
     createTextTransmitation();
 
-    olChart *olchart = new olChart(ui->graphicsView);
+    olchart = new olChart(ui->graphicsView);
+    ui->graphicsView->setChart(olchart->myChart);
+
 
 }
 
