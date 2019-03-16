@@ -1,34 +1,73 @@
 #include "olchart.h"
 
-
-olChart::olChart()
+olChart::olChart(type_of_chart typ_wykresu, input_signal sygnal_wejscia)
 {
-    blackPen.setColor(Qt::black);
+    this->legend()->hide();
+    axisX = new QValueAxis();
+    axisY = new QValueAxis();
 
-   this->legend()->hide();
-   przebieg = new QLineSeries();
 
-    for (int i = 0 ;  i < 100 ; i ++)
-    {
-      przebieg->append(double(i), 0.5*i);
-      qDebug()<<przebieg->at(i);
+    switch (typ_wykresu) {
+    case WEJSCIE:
+
+        this->setTitle("Sygnał wejściowy");
+        axisY->setTitleText("wartość sygnału");
+        axisX->setTitleText("czas [s]");
+
+        break;
+
+    case WYJSCIE:
+
+        this->setTitle("Sygnał wyjściowy");
+        axisY->setTitleText("wartość sygnału");
+        axisX->setTitleText("czas [s]");
+
+        break;
+
+    case AMPLITUDOWY:
+
+        this->setTitle("Charakterystyka Amplitudowa");
+        axisY->setTitleText("Amplituda [dB]");
+        axisX->setTitleText("Częstotliwość [rad/s]");
+
+        break;
+
+    case FAZOWY:
+
+        this->setTitle("Charakterystyka Fazowa");
+        axisY->setTitleText("Faza [stopnie]");
+        axisX->setTitleText("Częstotliwość [rad/s]");
+
+        break;
     }
 
-   this->addSeries(przebieg);
+    this->addAxis(axisY, Qt::AlignLeft);
+    this->addAxis(axisX, Qt::AlignBottom);
 
-    // wywala odwołanie do pustego
-    this->setTitle("Charakterystyka Amplitudowa");
-//    myChart->axes(Qt::Horizontal).first()->setRange(0, zakresX);
-//    myChart->axes(Qt::Horizontal).first()->setRange(0, zakresY);
+    switch (sygnal_wejscia) {
 
+    case SQUARE:
+        break;
 
-  // setRenderHint(QPainter::Antialiasing);
+    case HEAVYSIDE:
+        break;
 
+    case SINUS:
+        break;
 
+    }
+    setAllRanges(-10,10,-2,2);
 }
 
-void olChart::prepareolChart()
+
+void olChart::setAllRanges(int bottomX, int topX, int bottomY, int topY)
 {
+    //    PRZESZCZEP
+    //    this->axes(Qt::Horizontal).first()->setRange(bottomX, topX);
+    //    this->axes(Qt::Vertical).first()->setRange(bottomY, topY);
+
+    axisX->setRange(bottomX,topX);
+    axisY->setRange(bottomY,topY);
 
 }
 

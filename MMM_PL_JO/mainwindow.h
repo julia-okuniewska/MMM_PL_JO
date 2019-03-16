@@ -11,6 +11,7 @@
 
 #define startPoint 10;
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -33,6 +34,7 @@ public:
   QString nameOfFunctions[3] = {"fala prostokątna",
                                 "skok jednostkowy",
                                 "sinusoida"};
+
     void createTextTransmitation();
     void display_remarks();
     void prepareButtons();

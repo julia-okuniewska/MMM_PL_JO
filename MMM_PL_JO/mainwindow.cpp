@@ -13,9 +13,14 @@ MainWindow::MainWindow(QWidget *parent) :
     prepareButtons();
     createTextTransmitation();
 
-    olchart = new olChart();
-    ui->graphicsView->setChart(olchart);
 
+    olchart = new olChart(FAZOWY,SINUS);
+
+    ui->graphicsView->setChart(olchart);
+    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+
+    olChart *drugi = new olChart(WEJSCIE, SQUARE);
+    ui->graphicsView_2->setChart(drugi);
 
 }
 
@@ -30,10 +35,10 @@ void MainWindow::createTextTransmitation()
     textTransmitation.clear();
 
 
-    textTransmitation.append("Postać transmitancji H(s) \t \t funkcja wejściowa to: " );
-    int  id = signalsButton.checkedId();
-    if(id == -1 ) return;
-    textTransmitation.append( signalsButton.button(id)->text());
+    textTransmitation.append("Postać transmitancji H(s)" );
+//    int  id = signalsButton.checkedId();
+//    if(id == -1 ) return;
+//    textTransmitation.append( signalsButton.button(id)->text());
 
     textTransmitation.append("\n" + QString::number(b_1) + "s + " + QString::number(b_0) +"\n");
     textTransmitation.append("-------------------   * exp ( -s * "+QString::number(T));
@@ -153,7 +158,6 @@ void MainWindow::on_pushButton_2_clicked()
 {
     createTextTransmitation();
 }
-
 
 void MainWindow::on_pushButton_3_clicked()
 {
