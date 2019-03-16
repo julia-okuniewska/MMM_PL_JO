@@ -14,12 +14,12 @@ MainWindow::MainWindow(QWidget *parent) :
     createTextTransmitation();
 
 
-    olchart = new olChart(FAZOWY,SINUS);
+    olchart = new olChart(FAZOWY);
 
     ui->graphicsView->setChart(olchart);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 
-    olChart *drugi = new olChart(WEJSCIE, SQUARE);
+    olChart *drugi = new olChart(WEJSCIE);
     ui->graphicsView_2->setChart(drugi);
 
 }

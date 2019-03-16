@@ -9,36 +9,27 @@
 #include <QChartView>
 #include <QValueAxis>
 
-#define zakresX 50
-#define zakresY 150
 
 enum type_of_chart {WEJSCIE, WYJSCIE, AMPLITUDOWY, FAZOWY};
-enum input_signal {SQUARE, HEAVYSIDE, SINUS};
+
 
 typedef struct
 {
     type_of_chart typeOfChart;
-    input_signal inputOfChart;
-
-} chartData;
-
-typedef struct{
     QLineSeries *wejsciowy;
-    QLineSeries *wyjsciowy;
-}przebieg;
+
+} dataOfChart;
 
 
 class olChart : public QChart
 {
     Q_OBJECT
+
 public:
 
-    olChart(type_of_chart typ_wykresu, input_signal sygnal_wejscia);
-    ~olChart();
-
+    olChart(type_of_chart typ_wykresu);
+    void setSeries(QLineSeries *wej);
     void setAllRanges(int bottomX, int topX, int bottomY, int topY);
-
-
 
 private:
 

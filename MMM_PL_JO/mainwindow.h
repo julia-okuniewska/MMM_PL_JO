@@ -8,6 +8,7 @@
 #include <QDebug>
 
 #include "olchart.h"
+#include "matematyka.h"
 
 #define startPoint 10;
 

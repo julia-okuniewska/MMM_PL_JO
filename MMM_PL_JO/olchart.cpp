@@ -1,6 +1,6 @@
 #include "olchart.h"
 
-olChart::olChart(type_of_chart typ_wykresu, input_signal sygnal_wejscia)
+olChart::olChart(type_of_chart typ_wykresu)
 {
     this->legend()->hide();
     axisX = new QValueAxis();
@@ -44,18 +44,6 @@ olChart::olChart(type_of_chart typ_wykresu, input_signal sygnal_wejscia)
     this->addAxis(axisY, Qt::AlignLeft);
     this->addAxis(axisX, Qt::AlignBottom);
 
-    switch (sygnal_wejscia) {
-
-    case SQUARE:
-        break;
-
-    case HEAVYSIDE:
-        break;
-
-    case SINUS:
-        break;
-
-    }
     setAllRanges(-10,10,-2,2);
 }
 
@@ -68,10 +56,5 @@ void olChart::setAllRanges(int bottomX, int topX, int bottomY, int topY)
 
     axisX->setRange(bottomX,topX);
     axisY->setRange(bottomY,topY);
-
-}
-
-olChart::~olChart()
-{
 
 }

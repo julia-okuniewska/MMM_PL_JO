@@ -28,11 +28,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    olchart.cpp
+    olchart.cpp \
+    matematyka.cpp
 
 HEADERS += \
         mainwindow.h \
-    olchart.h
+    olchart.h \
+    matematyka.h
 
 FORMS += \
         mainwindow.ui
