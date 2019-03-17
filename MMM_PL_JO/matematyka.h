@@ -12,6 +12,13 @@ public:
     void wejscieHeavyside(QLineSeries *values);
     void wejscieSinus(QLineSeries *values);
 
+    double minimum = 20000;
+    double maksimum = -20000;
+
+    void checkMinimum(double value);
+    void checkMaksimum(double value);
+
+
 
 
 

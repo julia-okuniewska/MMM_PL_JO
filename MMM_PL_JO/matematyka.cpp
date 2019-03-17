@@ -21,11 +21,33 @@ void Matematyka::wejscieHeavyside(QLineSeries *values)
         else{
             values->append(i,1);
         }
+        minimum = -2;
+        maksimum = 2;
     }
 }
 
 void Matematyka::wejscieSinus(QLineSeries *values)
 {
-    values->append(1,1);
-    values->append(100,100);
+    qDebug()<<"sines";
+    for (double i = 0; i < 2 * M_PI; i += M_PI_4) {
+
+        double calculated = sin(i);
+        checkMinimum(calculated);
+        checkMaksimum(calculated);
+        values->append(i,calculated);
+
+    }
+}
+
+void Matematyka::checkMinimum(double value)
+{
+    if(value<minimum)
+    minimum = value;
+}
+
+void Matematyka::checkMaksimum(double value)
+{
+    if(value>maksimum)
+    maksimum = value;
+
 }
