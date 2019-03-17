@@ -8,7 +8,7 @@
 #include <QtCharts>
 #include <QChartView>
 #include <QValueAxis>
-
+#include <QLogValueAxis>
 
 enum type_of_chart {WEJSCIE, WYJSCIE, AMPLITUDOWY, FAZOWY};
 
@@ -31,8 +31,11 @@ public:
 
 private:
 
-    QValueAxis *axisX;
-    QValueAxis *axisY; 
+    QAbstractAxis *axisX;
+    QAbstractAxis *axisY;
+
+    void linLinAxis();
+    void loglogAxis();
 
 };
 

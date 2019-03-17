@@ -3,13 +3,12 @@
 olChart::olChart(type_of_chart typ_wykresu)
 {
     this->legend()->hide();
-    axisX = new QValueAxis();
-    axisY = new QValueAxis();
 
 
     switch (typ_wykresu) {
     case WEJSCIE:
 
+        linLinAxis();
         this->setTitle("Sygnał wejściowy");
         axisY->setTitleText("wartość sygnału");
         axisX->setTitleText("czas [s]");
@@ -18,6 +17,7 @@ olChart::olChart(type_of_chart typ_wykresu)
 
     case WYJSCIE:
 
+        linLinAxis();
         this->setTitle("Sygnał wyjściowy");
         axisY->setTitleText("wartość sygnału");
         axisX->setTitleText("czas [s]");
@@ -26,6 +26,7 @@ olChart::olChart(type_of_chart typ_wykresu)
 
     case AMPLITUDOWY:
 
+        loglogAxis();
         this->setTitle("Charakterystyka Amplitudowa");
         axisY->setTitleText("Amplituda [dB]");
         axisX->setTitleText("Częstotliwość [rad/s]");
@@ -34,6 +35,7 @@ olChart::olChart(type_of_chart typ_wykresu)
 
     case FAZOWY:
 
+        loglogAxis();
         this->setTitle("Charakterystyka Fazowa");
         axisY->setTitleText("Faza [stopnie]");
         axisX->setTitleText("Częstotliwość [rad/s]");
@@ -62,4 +64,16 @@ void olChart::setAllRanges(int bottomX, int topX, int bottomY, int topY)
     axisX->setRange(bottomX,topX);
     axisY->setRange(bottomY,topY);
 
+}
+
+void olChart::linLinAxis()
+{
+    axisX = new QValueAxis();
+    axisY = new QValueAxis();
+}
+
+void olChart::loglogAxis()
+{
+    axisX = new QLogValueAxis();
+    axisY = new QLogValueAxis();
 }
