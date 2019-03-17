@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->graphicsView->setChart(olchart);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
+
 
     olChart *drugi = new olChart(WEJSCIE);
     ui->graphicsView_2->setChart(drugi);
@@ -151,15 +153,28 @@ void MainWindow::on_lineEdit_4_textChanged()
 
 void MainWindow::on_pushButton_clicked()
 {
+    olchart->removeSeries(olchart->wejsciowy);
+    olchart->wejsciowy->clear();
+    matematyka.wejscieProstokatne(olchart->wejsciowy);
+    olchart->addSeries(olchart->wejsciowy);
+
     createTextTransmitation();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    olchart->removeSeries(olchart->wejsciowy);
+    olchart->wejsciowy->clear();
+    matematyka.wejscieHeavyside(olchart->wejsciowy);
+    olchart->addSeries(olchart->wejsciowy);
+
     createTextTransmitation();
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
+    olchart->removeSeries(olchart->wejsciowy);
+    olchart->wejsciowy->clear();
+    matematyka.wejscieSinus(olchart->wejsciowy);
     createTextTransmitation();
 }

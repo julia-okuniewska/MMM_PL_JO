@@ -1,14 +1,21 @@
 #ifndef MATEMATYKA_H
 #define MATEMATYKA_H
 
+#include <QtCharts>
 #include <QLineSeries>
 
-
-class matematyka
+class Matematyka
 {
 public:
-    matematyka();
-    QLineSeries policzSin();
+    Matematyka();
+    void wejscieProstokatne(QLineSeries *values);
+    void wejscieHeavyside(QLineSeries *values);
+    void wejscieSinus(QLineSeries *values);
+
+
+
+
+
 };
 
 #endif // MATEMATYKA_H

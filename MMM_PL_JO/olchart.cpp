@@ -44,8 +44,13 @@ olChart::olChart(type_of_chart typ_wykresu)
     this->addAxis(axisY, Qt::AlignLeft);
     this->addAxis(axisX, Qt::AlignBottom);
 
-    setAllRanges(-10,10,-2,2);
+    setAllRanges(-10,20,-10,10);
+    wejsciowy = new QLineSeries();
+    addSeries(wejsciowy);
 }
+
+
+
 
 
 void olChart::setAllRanges(int bottomX, int topX, int bottomY, int topY)

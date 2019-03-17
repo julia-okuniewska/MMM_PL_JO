@@ -7,6 +7,7 @@
 #include <QButtonGroup>
 #include <QDebug>
 
+
 #include "olchart.h"
 #include "matematyka.h"
 
@@ -35,6 +36,8 @@ public:
   QString nameOfFunctions[3] = {"fala prostokątna",
                                 "skok jednostkowy",
                                 "sinusoida"};
+
+
 
     void createTextTransmitation();
     void display_remarks();
@@ -65,6 +68,7 @@ private:
     Ui::MainWindow *ui;
     QButtonGroup signalsButton;
     olChart *olchart;
+    Matematyka matematyka;
 };
 
 #endif // MAINWINDOW_H
