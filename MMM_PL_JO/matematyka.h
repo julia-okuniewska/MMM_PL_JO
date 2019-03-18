@@ -15,6 +15,10 @@ public:
     double minimum = 20000;
     double maksimum = -20000;
 
+
+
+private:
+
     void checkMinimum(double value);
     void checkMaksimum(double value);
 

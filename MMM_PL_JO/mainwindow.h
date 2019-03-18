@@ -68,6 +68,7 @@ private:
     Ui::MainWindow *ui;
     QButtonGroup signalsButton;
     olChart *olchart;
+    olChart *olchartDolny;
     Matematyka matematyka;
 };
 

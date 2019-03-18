@@ -18,11 +18,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->graphicsView->setChart(olchart);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
-    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 
-
-    olChart *drugi = new olChart(WEJSCIE);
-    ui->graphicsView_2->setChart(drugi);
+    olchartDolny = new olChart(AMPLITUDOWY);
+    ui->graphicsView_2->setChart(olchartDolny);
+    qDebug()<<"jalo";
 
     emit on_pushButton_clicked();
 
@@ -96,11 +95,8 @@ void MainWindow::prepareButtons()
     signalsButton.addButton(ui->pushButton_2);
     signalsButton.addButton(ui->pushButton_3);
 
-    //emit on_pushButton_toggled(true);
     signalsButton.setExclusive(true);
-
     ui->pushButton->setChecked(true);
-
 
 }
 

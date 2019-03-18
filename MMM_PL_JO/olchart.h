@@ -19,6 +19,7 @@ enum type_of_chart {WEJSCIE, WYJSCIE, AMPLITUDOWY, FAZOWY};
 enum input_signal {SQUARE, HEAVYSIDE, SINUS};
 
 
+
 class olChart : public QChart
 {
     Q_OBJECT
@@ -27,7 +28,7 @@ public:
 
     olChart(type_of_chart typ_wykresu);
 
-    void setAllRanges(int bottomX, int topX, double bottomY, double topY);
+    void setAllRanges(type_of_chart rodzaj , double bottomX, double topX, double bottomY, double topY);
 
     void drawInput(input_signal pobudzenie);
 
