@@ -14,14 +14,13 @@ MainWindow::MainWindow(QWidget *parent) :
     createTextTransmitation();
 
 
-    olchart = new olChart(WYJSCIE);
+    olchart = new olChart(WEJSCIE);
 
     ui->graphicsView->setChart(olchart);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 
     olchartDolny = new olChart(AMPLITUDOWY);
     ui->graphicsView_2->setChart(olchartDolny);
-    qDebug()<<"jalo";
 
     emit on_pushButton_clicked();
 

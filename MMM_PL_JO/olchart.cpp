@@ -11,6 +11,7 @@ olChart::olChart(type_of_chart typ_wykresu)
         linLinAxis();
         this->setTitle("Sygnał wejściowy");
         setAllRanges(WEJSCIE, -10,20,-10,10);
+        addSeries(wejsciowy);
         break;
 
     case WYJSCIE:
@@ -27,7 +28,8 @@ olChart::olChart(type_of_chart typ_wykresu)
         this->setTitle("Charakterystyka Amplitudowa");
         laxisY->setTitleText("Amplituda [dB]");
         laxisX->setTitleText("Częstotliwość [rad/s]");
-        setAllRanges(AMPLITUDOWY, -10,20,-10,10);
+        setAllRanges(AMPLITUDOWY, -10,200,-10,100);
+
 
         break;
 
@@ -42,7 +44,7 @@ olChart::olChart(type_of_chart typ_wykresu)
         break;
     }
 
-    addSeries(wejsciowy);
+
 
 }
 
@@ -82,26 +84,28 @@ void olChart::loglogAxis()
 
     laxisX = new QLogValueAxis();
     laxisY = new QLogValueAxis();
-    qDebug()<<"lologAxis";
-
-    laxisX->setBase(20);
-    laxisY->setBase(20);
 
     laxisX->setLabelFormat("%g");
     laxisY->setLabelFormat("%g");
 
+    laxisX->setBase(10.0);
+    laxisY->setBase(10.0);
+
+
     laxisX->setMinorTickCount(-1);
     laxisY->setMinorTickCount(-1);
 
+addSeries(wejsciowy);
 
     *wejsciowy << QPointF(1.0, 1.0) << QPointF(2.0, 73.0) << QPointF(3.0, 268.0) << QPointF(4.0, 17.0)
               << QPointF(5.0, 4325.0) << QPointF(6.0, 723.0);
 
+
     this->addAxis(laxisX, Qt::AlignBottom);
     this->addAxis(laxisY, Qt::AlignLeft);
 
-    wejsciowy->attachAxis(laxisX);
-    wejsciowy->attachAxis(laxisY);
+wejsciowy->attachAxis(laxisX);
+wejsciowy->attachAxis(laxisY);
 }
 
 
