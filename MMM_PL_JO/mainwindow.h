@@ -8,7 +8,11 @@
 #include <QDebug>
 
 
+#include "olchart.h"
+#include "matematyka.h"
+
 #define startPoint 10;
+
 
 namespace Ui {
 class MainWindow;
@@ -30,8 +34,11 @@ public:
 
   QString textTransmitation;
   QString nameOfFunctions[3] = {"fala prostokątna",
-          "skok jednostkowy",
-          "sinusoida"};
+                                "skok jednostkowy",
+                                "sinusoida"};
+
+
+
     void createTextTransmitation();
     void display_remarks();
     void prepareButtons();
@@ -60,6 +67,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QButtonGroup signalsButton;
+    olChart *olchart;
+    olChart *olchartDolny;
+    Matematyka matematyka;
 };
 
 #endif // MAINWINDOW_H

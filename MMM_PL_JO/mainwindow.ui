@@ -14,22 +14,22 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QtCharts::QChartView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>230</y>
-      <width>1121</width>
-      <height>401</height>
+      <x>10</x>
+      <y>10</y>
+      <width>651</width>
+      <height>291</height>
      </rect>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>471</width>
+      <x>820</x>
+      <y>210</y>
+      <width>301</width>
       <height>100</height>
      </rect>
     </property>
@@ -53,8 +53,8 @@
       <rect>
        <x>0</x>
        <y>20</y>
-       <width>471</width>
-       <height>71</height>
+       <width>301</width>
+       <height>62</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -103,9 +103,9 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>0</y>
-      <width>371</width>
+      <x>800</x>
+      <y>10</y>
+      <width>351</width>
       <height>191</height>
      </rect>
     </property>
@@ -115,10 +115,10 @@
     <widget class="QWidget" name="formLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>20</y>
-       <width>301</width>
-       <height>182</height>
+       <x>20</x>
+       <y>30</y>
+       <width>302</width>
+       <height>151</height>
       </rect>
      </property>
      <layout class="QFormLayout" name="formLayout">
@@ -132,13 +132,32 @@
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QLabel" name="label">
+          <property name="maximumSize">
+           <size>
+            <width>25</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="text">
            <string>a1 = </string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="lineEdit">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -146,13 +165,26 @@
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLabel" name="label_2">
+          <property name="maximumSize">
+           <size>
+            <width>25</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="text">
            <string>a0 = </string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_2"/>
+         <widget class="QLineEdit" name="lineEdit_2">
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -160,13 +192,26 @@
        <layout class="QHBoxLayout" name="horizontalLayout_9">
         <item>
          <widget class="QLabel" name="label_8">
+          <property name="maximumSize">
+           <size>
+            <width>25</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="text">
            <string>b1 = </string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_8"/>
+         <widget class="QLineEdit" name="lineEdit_8">
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -174,13 +219,26 @@
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
          <widget class="QLabel" name="label_3">
+          <property name="maximumSize">
+           <size>
+            <width>25</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="text">
            <string>b0 = </string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_3"/>
+         <widget class="QLineEdit" name="lineEdit_3">
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -188,36 +246,92 @@
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
          <widget class="QLabel" name="label_4">
+          <property name="maximumSize">
+           <size>
+            <width>25</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <property name="text">
            <string> T =  </string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_4"/>
+         <widget class="QLineEdit" name="lineEdit_4">
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
         </item>
        </layout>
+      </item>
+      <item row="2" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string> stabilność  </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_5">
+          <property name="maximumSize">
+           <size>
+            <width>75</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QTextBrowser" name="remarks">
+        <property name="minimumSize">
+         <size>
+          <width>275</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>290</width>
+          <height>30</height>
+         </size>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </widget>
-   <widget class="QTextBrowser" name="remarks">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>190</y>
-      <width>301</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPlainTextEdit" name="transmitationWindow">
     <property name="geometry">
      <rect>
-      <x>23</x>
-      <y>130</y>
-      <width>621</width>
-      <height>70</height>
+      <x>870</x>
+      <y>320</y>
+      <width>201</width>
+      <height>101</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QtCharts::QChartView" name="graphicsView_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>330</y>
+      <width>651</width>
+      <height>281</height>
      </rect>
     </property>
    </widget>
@@ -231,6 +345,16 @@
      <height>20</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuWykresy">
+    <property name="title">
+     <string>Wykresy</string>
+    </property>
+    <addaction name="actionWej_cie_u_t"/>
+    <addaction name="actionChar_Amplitudowa"/>
+    <addaction name="actionChar_Fazowa"/>
+    <addaction name="actionWyj_cie_y_t"/>
+   </widget>
+   <addaction name="menuWykresy"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -241,8 +365,35 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionChar_Amplitudowa">
+   <property name="text">
+    <string>Char. Amplitudowa</string>
+   </property>
+  </action>
+  <action name="actionChar_Fazowa">
+   <property name="text">
+    <string>Char. Fazowa</string>
+   </property>
+  </action>
+  <action name="actionWyj_cie_y_t">
+   <property name="text">
+    <string>Wyjście y(t)</string>
+   </property>
+  </action>
+  <action name="actionWej_cie_u_t">
+   <property name="text">
+    <string>Wejście u(t)</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QtCharts::QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">QtCharts</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
