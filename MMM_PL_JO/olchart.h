@@ -27,6 +27,7 @@ class olChart : public QChart
 public:
 
     olChart(type_of_chart typ_wykresu);
+    ~olChart();
 
     void setAllRanges(type_of_chart rodzaj , double bottomX, double topX, double bottomY, double topY);
 

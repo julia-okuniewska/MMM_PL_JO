@@ -4,6 +4,8 @@ olChart::olChart(type_of_chart typ_wykresu)
 {
     this->legend()->hide();
     wejsciowy = new QLineSeries();
+    addSeries(wejsciowy);
+
 
     switch (typ_wykresu) {
     case WEJSCIE:
@@ -22,14 +24,12 @@ olChart::olChart(type_of_chart typ_wykresu)
         break;
 
     case AMPLITUDOWY:
-        qDebug()<<"halo konstrutor";
 
         loglogAxis();
         this->setTitle("Charakterystyka Amplitudowa");
         laxisY->setTitleText("Amplituda [dB]");
         laxisX->setTitleText("Częstotliwość [rad/s]");
         setAllRanges(AMPLITUDOWY, -10,200,-10,100);
-
 
         break;
 
@@ -44,16 +44,16 @@ olChart::olChart(type_of_chart typ_wykresu)
         break;
     }
 
+}
 
 
+olChart::~olChart()
+{
+    qDebug()<<"usuwam";
 }
 
 void olChart::setAllRanges(type_of_chart rodzaj, double bottomX, double topX, double bottomY, double topY)
 {
-    //    PRZESZCZEP
-    //    this->axes(Qt::Horizontal).first()->setRange(bottomX, topX);
-    //    this->axes(Qt::Vertical).first()->setRange(bottomY, topY);
-
     if(rodzaj == WEJSCIE || rodzaj == WYJSCIE){
         axisX->setRange(bottomX,topX);
         axisY->setRange(bottomY,topY);
@@ -62,7 +62,6 @@ void olChart::setAllRanges(type_of_chart rodzaj, double bottomX, double topX, do
         laxisX->setRange(bottomX,topX);
         laxisY->setRange(bottomY,topY);
     }
-
 }
 
 void olChart::linLinAxis()
@@ -75,7 +74,6 @@ void olChart::linLinAxis()
 
     this->addAxis(axisX, Qt::AlignBottom);
     this->addAxis(axisY, Qt::AlignLeft);
-
 
 }
 
@@ -91,11 +89,8 @@ void olChart::loglogAxis()
     laxisX->setBase(10.0);
     laxisY->setBase(10.0);
 
-
-    laxisX->setMinorTickCount(-1);
+    laxisX->setMinorTickCount(1);
     laxisY->setMinorTickCount(-1);
-
-addSeries(wejsciowy);
 
     *wejsciowy << QPointF(1.0, 1.0) << QPointF(2.0, 73.0) << QPointF(3.0, 268.0) << QPointF(4.0, 17.0)
               << QPointF(5.0, 4325.0) << QPointF(6.0, 723.0);
@@ -104,8 +99,8 @@ addSeries(wejsciowy);
     this->addAxis(laxisX, Qt::AlignBottom);
     this->addAxis(laxisY, Qt::AlignLeft);
 
-wejsciowy->attachAxis(laxisX);
-wejsciowy->attachAxis(laxisY);
+    wejsciowy->attachAxis(laxisX);
+    wejsciowy->attachAxis(laxisY);
 }
 
 
@@ -124,16 +119,18 @@ void olChart::drawInput(input_signal pobudzenie)
 
     case SQUARE:
          matematyka.wejscieProstokatne(wejsciowy);
-         setAllRanges(WEJSCIE,0,5,-0.5,1.5);
+         setAllRanges(WEJSCIE,matematyka.minimumX,matematyka.maksimumX,
+                              matematyka.minimumY, matematyka.maksimumY);
         break;
 
     case HEAVYSIDE:
         matematyka.wejscieHeavyside(wejsciowy);
-        setAllRanges(WEJSCIE,-2,5,-1,3);
+        setAllRanges(WEJSCIE,matematyka.minimumX,matematyka.maksimumX,
+                             matematyka.minimumY, matematyka.maksimumY);
         break;
     case SINUS:
         matematyka.wejscieSinus(wejsciowy);
-        setAllRanges(WEJSCIE,0,4*M_PI,matematyka.minimum, matematyka.maksimum);
+        setAllRanges(WEJSCIE,0,4*M_PI,matematyka.minimumY, matematyka.maksimumY);
         break;
 
     }

@@ -9,20 +9,17 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowTitle("Metody Modelowania Matematycznego - Projekt Lipkiewicz Okuniewska");
     ui->transmitationWindow->setReadOnly(true);
 
-
     prepareButtons();
     createTextTransmitation();
-
 
     olchart = new olChart(WEJSCIE);
 
     ui->graphicsView->setChart(olchart);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
-
-    olchartDolny = new olChart(AMPLITUDOWY);
-    ui->graphicsView_2->setChart(olchartDolny);
+    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 
     emit on_pushButton_clicked();
+    emit on_pushButton_4_clicked();
 
 }
 
@@ -33,14 +30,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::createTextTransmitation()
 {
+
     ui->transmitationWindow->clear();
     textTransmitation.clear();
 
 
     textTransmitation.append("Postać transmitancji H(s)" );
-//    int  id = signalsButton.checkedId();
-//    if(id == -1 ) return;
-//    textTransmitation.append( signalsButton.button(id)->text());
 
     textTransmitation.append("\n" + QString::number(b_1) + "s + " + QString::number(b_0) +"\n");
     textTransmitation.append("-------------------   * exp ( -s * "+QString::number(T));
@@ -48,7 +43,6 @@ void MainWindow::createTextTransmitation()
     textTransmitation.append(QString::number(a_0));
 
     ui->transmitationWindow->setPlainText(textTransmitation);
-
 
 }
 
@@ -94,7 +88,17 @@ void MainWindow::prepareButtons()
     signalsButton.addButton(ui->pushButton_2);
     signalsButton.addButton(ui->pushButton_3);
 
+    ui->pushButton_4->setCheckable(true);
+    ui->pushButton_5->setCheckable(true);
+    ui->pushButton_6->setCheckable(true);
+
+    outputButton.addButton(ui->pushButton_4);
+    outputButton.addButton(ui->pushButton_5);
+    outputButton.addButton(ui->pushButton_6);
+
+
     signalsButton.setExclusive(true);
+    outputButton.setExclusive(true);
     ui->pushButton->setChecked(true);
 
 }
@@ -165,3 +169,36 @@ void MainWindow::on_pushButton_3_clicked()
     olchart->drawInput(SINUS);
     createTextTransmitation();
 }
+
+void MainWindow::on_actionWej_cie_u_t_triggered()
+{
+    qDebug()<<"menu wykresu";
+
+    QDialog *dialog = new QDialog();
+    olChart *wykresWejscie = new olChart(WEJSCIE);
+    QChartView *chartview = new QChartView(wykresWejscie,dialog);
+
+    chartview->setMinimumSize(1000,700);
+    dialog->show();
+
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    olchartDolny = new olChart(WEJSCIE);
+    ui->graphicsView_2->setChart(olchartDolny);
+
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    olchartDolny = new olChart(AMPLITUDOWY);
+    ui->graphicsView_2->setChart(olchartDolny);
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    olchartDolny = new olChart(FAZOWY);
+    ui->graphicsView_2->setChart(olchartDolny);
+}
+

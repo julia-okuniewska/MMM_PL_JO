@@ -64,9 +64,19 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_actionWej_cie_u_t_triggered();
+
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_6_clicked();
+
+
 private:
     Ui::MainWindow *ui;
     QButtonGroup signalsButton;
+    QButtonGroup outputButton;
     olChart *olchart;
     olChart *olchartDolny;
     Matematyka matematyka;
