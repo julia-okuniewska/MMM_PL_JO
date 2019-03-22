@@ -6,17 +6,17 @@ Matematyka::Matematyka()
 }
 void Matematyka::wejscieProstokatne(QLineSeries *values)
 {
-    qDebug()<<"prostokatne";
-    double value;
+    //  WYŁACZNIE PRZYKŁADOWE
+    double obliczaneY;
     for (double i = -2; i < 1000; i += 2) {
 
         for(double j = 0 ; j <=2 ; j+=0.01){
 
-            if (j == 0 || j == 1) value = 0.5;
-            else if(j>0 && j <1) value = 1;
-            else value = 0;
+            if (j == 0 || j == 1) obliczaneY = 0.5;
+            else if(j>0 && j <1) obliczaneY = 1;
+            else obliczaneY = 0;
 
-            values->append(i+j, value);
+            values->append(i+j, obliczaneY);
         }
     }
 
@@ -27,7 +27,7 @@ void Matematyka::wejscieProstokatne(QLineSeries *values)
 
 void Matematyka::wejscieHeavyside(QLineSeries *values)
 {
-    qDebug()<<"hedynka ";
+    //  WYŁACZNIE PRZYKŁADOWE
     for (double i = -1 ; i< 500 ; i+=0.01) {
 
         if(i<0){
@@ -46,7 +46,7 @@ void Matematyka::wejscieHeavyside(QLineSeries *values)
 
 void Matematyka::wejscieSinus(QLineSeries *values)
 {
-    qDebug()<<"sines";
+    //  WYŁACZNIE PRZYKŁADOWE
     for (double i = 0; i < 4 * M_PI; i += (M_PI_4/2)) {
 
         double calculated = sin(i);

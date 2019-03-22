@@ -3,8 +3,8 @@
 olChart::olChart(type_of_chart typ_wykresu)
 {
     this->legend()->hide();
-    wejsciowy = new QLineSeries();
-    addSeries(wejsciowy);
+    daneNaWykresie = new QLineSeries();
+    addSeries(daneNaWykresie);
 
 
     switch (typ_wykresu) {
@@ -12,15 +12,14 @@ olChart::olChart(type_of_chart typ_wykresu)
 
         linLinAxis();
         this->setTitle("Sygnał wejściowy");
-        setAllRanges(WEJSCIE, -10,20,-10,10);
-        addSeries(wejsciowy);
+        ustawPrzedzialyWykresu(WEJSCIE, -10,20,-10,10);
         break;
 
     case WYJSCIE:
 
         linLinAxis();
         this->setTitle("Sygnał wyjściowy");
-        setAllRanges(WYJSCIE, -10,20,-10,10);
+        ustawPrzedzialyWykresu(WYJSCIE, -10,10,-10,110);
         break;
 
     case AMPLITUDOWY:
@@ -29,7 +28,7 @@ olChart::olChart(type_of_chart typ_wykresu)
         this->setTitle("Charakterystyka Amplitudowa");
         laxisY->setTitleText("Amplituda [dB]");
         laxisX->setTitleText("Częstotliwość [rad/s]");
-        setAllRanges(AMPLITUDOWY, -10,200,-10,100);
+        ustawPrzedzialyWykresu(AMPLITUDOWY, -10,200,-10,100);
 
         break;
 
@@ -39,24 +38,36 @@ olChart::olChart(type_of_chart typ_wykresu)
         this->setTitle("Charakterystyka Fazowa");
         laxisY->setTitleText("Faza [stopnie]");
         laxisX->setTitleText("Częstotliwość [rad/s]");
-        setAllRanges(FAZOWY, -10,20,-10,10);
+        ustawPrzedzialyWykresu(FAZOWY, -10,30,-10,10);
 
         break;
     }
 
 }
 
-
-olChart::~olChart()
+void olChart::setData(type_of_chart typ_wykresu, QLineSeries *danePrzekazane)
 {
-    qDebug()<<"usuwam";
+    removeSeries(daneNaWykresie);
+    daneNaWykresie = danePrzekazane;
+    this->addSeries(daneNaWykresie);
+
+    if(typ_wykresu == WEJSCIE || typ_wykresu == WYJSCIE){
+
+       daneNaWykresie->attachAxis(axisX);
+       daneNaWykresie->attachAxis(axisY);
+    }
+    else {
+        daneNaWykresie->attachAxis(laxisX);
+        daneNaWykresie->attachAxis(laxisY);
+    }
 }
 
-void olChart::setAllRanges(type_of_chart rodzaj, double bottomX, double topX, double bottomY, double topY)
+void olChart::ustawPrzedzialyWykresu(type_of_chart typ_wykresu, double bottomX, double topX, double bottomY, double topY)
 {
-    if(rodzaj == WEJSCIE || rodzaj == WYJSCIE){
+    if(typ_wykresu == WEJSCIE || typ_wykresu == WYJSCIE){
         axisX->setRange(bottomX,topX);
         axisY->setRange(bottomY,topY);
+
     }
     else {
         laxisX->setRange(bottomX,topX);
@@ -74,7 +85,6 @@ void olChart::linLinAxis()
 
     this->addAxis(axisX, Qt::AlignBottom);
     this->addAxis(axisY, Qt::AlignLeft);
-
 }
 
 void olChart::loglogAxis()
@@ -89,52 +99,9 @@ void olChart::loglogAxis()
     laxisX->setBase(10.0);
     laxisY->setBase(10.0);
 
-    laxisX->setMinorTickCount(1);
-    laxisY->setMinorTickCount(-1);
-
-    *wejsciowy << QPointF(1.0, 1.0) << QPointF(2.0, 73.0) << QPointF(3.0, 268.0) << QPointF(4.0, 17.0)
-              << QPointF(5.0, 4325.0) << QPointF(6.0, 723.0);
-
+    laxisX->setMinorTickCount(5);
+    laxisY->setMinorTickCount(5);
 
     this->addAxis(laxisX, Qt::AlignBottom);
     this->addAxis(laxisY, Qt::AlignLeft);
-
-    wejsciowy->attachAxis(laxisX);
-    wejsciowy->attachAxis(laxisY);
-}
-
-
-void olChart::drawInput(input_signal pobudzenie)
-{
-    if(wejsciowy->count() != 0) {
-        removeSeries(wejsciowy);
-        wejsciowy->clear();
-    }
-    else{
-        qDebug()<<"Zbiór punktów jest pusty!";
-        removeSeries(wejsciowy);
-    }
-
-    switch (pobudzenie) {
-
-    case SQUARE:
-         matematyka.wejscieProstokatne(wejsciowy);
-         setAllRanges(WEJSCIE,matematyka.minimumX,matematyka.maksimumX,
-                              matematyka.minimumY, matematyka.maksimumY);
-        break;
-
-    case HEAVYSIDE:
-        matematyka.wejscieHeavyside(wejsciowy);
-        setAllRanges(WEJSCIE,matematyka.minimumX,matematyka.maksimumX,
-                             matematyka.minimumY, matematyka.maksimumY);
-        break;
-    case SINUS:
-        matematyka.wejscieSinus(wejsciowy);
-        setAllRanges(WEJSCIE,0,4*M_PI,matematyka.minimumY, matematyka.maksimumY);
-        break;
-
-    }
-    addSeries(wejsciowy);
-    wejsciowy->attachAxis(axisX);
-    wejsciowy->attachAxis(axisY);
 }

@@ -9,17 +9,12 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowTitle("Metody Modelowania Matematycznego - Projekt Lipkiewicz Okuniewska");
     ui->transmitationWindow->setReadOnly(true);
 
+
     prepareButtons();
     createTextTransmitation();
 
     olchart = new olChart(WEJSCIE);
-
     ui->graphicsView->setChart(olchart);
-    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
-    ui->graphicsView->setRenderHint(QPainter::Antialiasing);
-
-    emit on_pushButton_clicked();
-    emit on_pushButton_4_clicked();
 
 }
 
@@ -99,6 +94,7 @@ void MainWindow::prepareButtons()
 
     signalsButton.setExclusive(true);
     outputButton.setExclusive(true);
+
     ui->pushButton->setChecked(true);
 
 }
@@ -154,51 +150,80 @@ void MainWindow::on_lineEdit_4_textChanged()
 
 void MainWindow::on_pushButton_clicked()
 {
-    olchart->drawInput(SQUARE);
-    createTextTransmitation();
+    QLineSeries *dane =new QLineSeries();
+
+    // to jest przykladowa funkcja
+    matematyka.wejscieProstokatne(dane);
+    //--
+    olchart->setData(WEJSCIE,dane);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,matematyka.minimumX,matematyka.maksimumX,
+                                    matematyka.minimumY, matematyka.maksimumY);
+
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    olchart->drawInput(HEAVYSIDE);
-    createTextTransmitation();
+    QLineSeries *dane =new QLineSeries();
+
+    //to jest przykladowa funkcja
+    matematyka.wejscieHeavyside(dane);
+    //--
+    olchart->setData(WEJSCIE,dane);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,matematyka.minimumX,matematyka.maksimumX,
+                                    matematyka.minimumY, matematyka.maksimumY);
+
 }
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    olchart->drawInput(SINUS);
-    createTextTransmitation();
-}
+    QLineSeries *dane =new QLineSeries();
 
-void MainWindow::on_actionWej_cie_u_t_triggered()
-{
-    qDebug()<<"menu wykresu";
+    // to jest przykladowa funkcja
+    matematyka.wejscieSinus(dane);
+    //--
+    olchart->setData(WEJSCIE,dane);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,matematyka.minimumX,matematyka.maksimumX,
+                                    matematyka.minimumY, matematyka.maksimumY);
 
-    QDialog *dialog = new QDialog();
-    olChart *wykresWejscie = new olChart(WEJSCIE);
-    QChartView *chartview = new QChartView(wykresWejscie,dialog);
-
-    chartview->setMinimumSize(1000,700);
-    dialog->show();
 
 }
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    olchartDolny = new olChart(WEJSCIE);
-    ui->graphicsView_2->setChart(olchartDolny);
+    olchartDolny = new olChart(WYJSCIE);
 
+    // to jest przykładowy przebieg
+    QLineSeries *nowe = new QLineSeries();
+    *nowe << QPointF(1.0, 1.0) << QPointF(2.0, 33.0) << QPointF(3.0, 28.0) << QPointF(4.0, 17.0)
+          << QPointF(5.0, 25.0) << QPointF(6.0, 43.0) << QPointF(10.0, 13.0);
+    //--
+    olchartDolny->setData(WYJSCIE,nowe);
+    ui->graphicsView_2->setChart(olchartDolny);
 }
 
 void MainWindow::on_pushButton_5_clicked()
 {
     olchartDolny = new olChart(AMPLITUDOWY);
+
+    // to jest przykładowy przebieg
+    QLineSeries *nowe = new QLineSeries();
+    *nowe << QPointF(1.0, 1.0) << QPointF(2.0, 73.0) << QPointF(3.0, 268.0) << QPointF(4.0, 17.0)
+          << QPointF(5.0, 4325.0) << QPointF(6.0, 723.0) << QPointF(100.0, 723.0);
+    //--
+    olchartDolny->setData(AMPLITUDOWY,nowe);
     ui->graphicsView_2->setChart(olchartDolny);
+
 }
 
 void MainWindow::on_pushButton_6_clicked()
 {
     olchartDolny = new olChart(FAZOWY);
-    ui->graphicsView_2->setChart(olchartDolny);
+
+    // to jest przykładowy przebieg
+    QLineSeries *nowe = new QLineSeries();
+    *nowe << QPointF(3,300) << QPointF(40,500) << QPointF(44,550) << QPointF(94,1000);
+    //--
+    olchartDolny->setData(FAZOWY,nowe);
+    ui->graphicsView_2->setChart(olchartDolny);    
 }
 

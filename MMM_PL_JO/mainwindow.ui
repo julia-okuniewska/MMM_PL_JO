@@ -357,16 +357,6 @@
      <height>20</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuWykresy">
-    <property name="title">
-     <string>Wykresy</string>
-    </property>
-    <addaction name="actionWej_cie_u_t"/>
-    <addaction name="actionChar_Amplitudowa"/>
-    <addaction name="actionChar_Fazowa"/>
-    <addaction name="actionWyj_cie_y_t"/>
-   </widget>
-   <addaction name="menuWykresy"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -377,26 +367,6 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionChar_Amplitudowa">
-   <property name="text">
-    <string>Char. Amplitudowa</string>
-   </property>
-  </action>
-  <action name="actionChar_Fazowa">
-   <property name="text">
-    <string>Char. Fazowa</string>
-   </property>
-  </action>
-  <action name="actionWyj_cie_y_t">
-   <property name="text">
-    <string>Wyjście y(t)</string>
-   </property>
-  </action>
-  <action name="actionWej_cie_u_t">
-   <property name="text">
-    <string>Wejście u(t)</string>
-   </property>
-  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

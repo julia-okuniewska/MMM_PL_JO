@@ -11,11 +11,8 @@
 #include <QValueAxis>
 #include <QLogValueAxis>
 
-#include "matematyka.h"
-
 
 enum type_of_chart {WEJSCIE, WYJSCIE, AMPLITUDOWY, FAZOWY};
-
 enum input_signal {SQUARE, HEAVYSIDE, SINUS};
 
 
@@ -26,27 +23,25 @@ class olChart : public QChart
 
 public:
 
+
     olChart(type_of_chart typ_wykresu);
-    ~olChart();
 
-    void setAllRanges(type_of_chart rodzaj , double bottomX, double topX, double bottomY, double topY);
+    void setData(type_of_chart typ_wykresu, QLineSeries *danePrzekazane);
 
-    void drawInput(input_signal pobudzenie);
+    void ustawPrzedzialyWykresu(type_of_chart typ_wykresu , double bottomX, double topX, double bottomY, double topY);
 
     type_of_chart typeOfChart;
-    QLineSeries *wejsciowy;
+    QLineSeries *daneNaWykresie;
 
 
-
+private:
     QValueAxis *axisX;
     QValueAxis *axisY;
     QLogValueAxis *laxisX;
     QLogValueAxis *laxisY;
-    Matematyka matematyka;
+
     void linLinAxis();
     void loglogAxis();
-
-
 };
 
 #endif // OLCHART_H
