@@ -70,7 +70,7 @@ void Matematyka::wejscieSinus(QLineSeries *values)
 }
 double Matematyka::transmitationFun( int i)
 {
-    double y= 10*i + 10;
+    double y= 10/(i*i+ 50*i-20);
     return y;
 }
 
@@ -95,11 +95,11 @@ double Matematyka::simpsonIntegration(int xlast)
         sum += splotFun(x-dx/2);
         if (i< numberOfPoints)
         {
-          y+= splotFun(x);
+          s= y+= splotFun(x);
         }
     }
-    s = dx/6 * splotFun(xfirst)+splotFun(xlast) + 2*y + 4*sum;
-    y= int(s);
+    s = dx/6 * splotFun(xfirst)+splotFun(xlast) + 2*s + 4*sum;
+    //y= int(s);
     return s;
 }
 
