@@ -4,6 +4,7 @@ olChart::olChart(type_of_chart typ_wykresu)
 {
     this->legend()->hide();
     daneNaWykresie = new QLineSeries();
+
     addSeries(daneNaWykresie);
 
 
