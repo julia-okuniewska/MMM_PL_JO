@@ -14,14 +14,16 @@ public:
     void wejscieHeavyside(QLineSeries *values);
     void wejscieSinus(QLineSeries *values);
 
-    int rectangleInput (int i);
+
+    int rectangleInput (double i);
     void heavysideInput();
     void sinusInput ();
 
-    double transmitationFun(int i);
-    double splotFun(int x);
-    double simpsonIntegration ( int xlast);
+    double transmitationFun(double i);
+    double splotFun(double x, double dx);
+    double simpsonIntegration ( double xlast);
     void fillsplot (double splot [2000] );
+    double splot ( double i);
     //------------------------------------------
 
     QLineSeries *obliczaneDane;
@@ -31,8 +33,7 @@ public:
 
     double minimumY = 20000;
     double maksimumY = -20000;
-    int numberOfPoints = 1000;
-    double splot[2000];
+    const int numberOfPoints = 1000;
 
 private:
 

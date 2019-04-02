@@ -5,15 +5,17 @@ Matematyka::Matematyka()
 
 }
 
-int Matematyka::rectangleInput(int i)
+int Matematyka::rectangleInput(double i)
 {
         int gorka = 1;
         int dolinka= -1;
-        if (i%200<100)
+       //int calkowite_i = int(i);
+        if (int(i)%2<1)
         {
             return gorka;
         }
-        return dolinka;
+        else
+            return dolinka;
 }
 
 
@@ -68,23 +70,22 @@ void Matematyka::wejscieSinus(QLineSeries *values)
         values->append(i,calculated);
     }
 }
-double Matematyka::transmitationFun( int i)
+double Matematyka::transmitationFun( double i)
 {
-    double y= 10/(i*i+ 50*i-20);
+    if(i==0.) return 0;
+    double y= 1*i;
     return y;
 }
 
 
-double Matematyka:: splotFun(int x)
+double Matematyka:: splotFun(double x, double dx)
 {
-    return transmitationFun(x)*rectangleInput(x);
+    return transmitationFun(x)*rectangleInput(x-dx);
 }
 
-double Matematyka::simpsonIntegration(int xlast)
+double Matematyka::simpsonIntegration (double xlast)
 {
-    const int numberOfPoints= 1000;
-    int xfirst, y, sum, dx, x;
-    double s;
+    double xfirst, y, sum, dx, x;
     xfirst=0;
     y=0;
     sum=0;
@@ -92,24 +93,23 @@ double Matematyka::simpsonIntegration(int xlast)
     for (int i=1; i<=numberOfPoints; i++)
     {
         x = xfirst + i*dx;
-        sum += splotFun(x-dx/2);
+        sum += splotFun(x-dx/2, 0);
         if (i< numberOfPoints)
         {
-          s= y+= splotFun(x);
+           y+= splotFun(x, 0);
         }
     }
-    s = dx/6 * splotFun(xfirst)+splotFun(xlast) + 2*s + 4*sum;
-    //y= int(s);
-    return s;
+    y = dx/6 * (splotFun(xfirst, 0)+splotFun(xlast, 0) + 2*y + 4*sum);
+    return y;
 }
 
-void Matematyka::fillsplot (double splot[2000] )
+
+double Matematyka::splot (double i )
 {
-    for(int i=0; i<2000; i++)
-    {
-        splot[i] = simpsonIntegration(i);
-    }
+
+        return splotFun(i,0);
 }
+
 
 void Matematyka::checkMinimum(double value)
 {

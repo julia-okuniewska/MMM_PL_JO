@@ -153,11 +153,17 @@ void MainWindow::on_pushButton_clicked()
     QLineSeries *dane =new QLineSeries();
 
     // to jest przykladowa funkcja
-    matematyka.wejscieProstokatne(dane);
+    //matematyka.wejscieProstokatne(dane);
     //--
+    for (int i=0; i<20000; i++)
+    {
+        double j=i/10;
+        dane->append(i, matematyka.rectangleInput(j));
+    }
+
     olchart->setData(WEJSCIE,dane);
-    olchart->ustawPrzedzialyWykresu(WEJSCIE,matematyka.minimumX,matematyka.maksimumX,
-                                    matematyka.minimumY, matematyka.maksimumY);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,-10,200,-3, 3);
+    //(WEJSCIE,matematyka.minimumX,matematyka.maksimumX,matematyka.minimumY, matematyka.maksimumY);
 
 }
 
@@ -198,9 +204,10 @@ void MainWindow::on_pushButton_4_clicked()
     //      << QPointF(5.0, 25.0) << QPointF(6.0, 43.0) << QPointF(10.0, 13.0);
     //--
     QLineSeries *nowe =new QLineSeries();
-    for (int i=0; i<2000; i++)
+    for (int i=0; i<20000; i++)
     {
-        nowe->append(double(i)/100, matematyka.splot[i]);
+        double j=i/10;
+        nowe->append(i, matematyka.simpsonIntegration(j));
     }
 
     olchartDolny->setData(WYJSCIE,nowe);
