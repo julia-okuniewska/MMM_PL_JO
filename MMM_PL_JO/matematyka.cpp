@@ -1,21 +1,34 @@
 #include "matematyka.h"
 
+
 Matematyka::Matematyka()
 {
 
 }
 
 int Matematyka::rectangleInput(double i)
-{
+{        
         int gorka = 1;
         int dolinka= -1;
-       //int calkowite_i = int(i);
-        if (int(i)%2<1)
+        int faza=int(i)%Tin;
+        if(faza>Tin/2)
         {
             return gorka;
         }
-        else
-            return dolinka;
+        return dolinka;
+
+}
+
+double Matematyka::sinusInput (double i)
+{
+    return sin(Tin*i);
+}
+
+int Matematyka::heavysideInput(double i)
+{
+    if(i>0)
+        return 1;
+    return 0;
 }
 
 
@@ -78,9 +91,17 @@ double Matematyka::transmitationFun( double i)
 }
 
 
-double Matematyka:: splotFun(double x, double dx)
+double Matematyka:: splotFun(double x)
 {
-    return transmitationFun(x)*rectangleInput(x-dx);
+    //double z=transmitationFun(x);
+    //double y=0;
+    return rectangleInput(x)*transmitationFun(x);
+//    for (double j=0; j<10; j=j+0.1){
+//        y += z*rectangleInput(x+j);
+//    }
+//    return y;
+    //return transmitationFun(x)*rectangleInput(x);
+
 }
 
 double Matematyka::simpsonIntegration (double xlast)
@@ -93,13 +114,13 @@ double Matematyka::simpsonIntegration (double xlast)
     for (int i=1; i<=numberOfPoints; i++)
     {
         x = xfirst + i*dx;
-        sum += splotFun(x-dx/2, 0);
+        sum += splotFun(x-dx/2);
         if (i< numberOfPoints)
         {
-           y+= splotFun(x, 0);
+           y+= splotFun(x);
         }
     }
-    y = dx/6 * (splotFun(xfirst, 0)+splotFun(xlast, 0) + 2*y + 4*sum);
+    y = dx/6 * (splotFun(xfirst)+splotFun(xlast) + 2*y + 4*sum);
     return y;
 }
 
@@ -107,7 +128,7 @@ double Matematyka::simpsonIntegration (double xlast)
 double Matematyka::splot (double i )
 {
 
-        return splotFun(i,0);
+        return splotFun(i);
 }
 
 

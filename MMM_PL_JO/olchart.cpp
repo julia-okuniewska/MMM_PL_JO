@@ -20,7 +20,7 @@ olChart::olChart(type_of_chart typ_wykresu)
 
         linLinAxis();
         this->setTitle("Sygnał wyjściowy");
-        ustawPrzedzialyWykresu(WYJSCIE, -10,200,-10.02,10);
+        ustawPrzedzialyWykresu(WYJSCIE, -10,200,-50.02,50);
         break;
 
     case AMPLITUDOWY:

@@ -152,9 +152,6 @@ void MainWindow::on_pushButton_clicked()
 {
     QLineSeries *dane =new QLineSeries();
 
-    // to jest przykladowa funkcja
-    //matematyka.wejscieProstokatne(dane);
-    //--
     for (int i=0; i<20000; i++)
     {
         double j=i/10;
@@ -162,8 +159,8 @@ void MainWindow::on_pushButton_clicked()
     }
 
     olchart->setData(WEJSCIE,dane);
-    olchart->ustawPrzedzialyWykresu(WEJSCIE,-10,200,-3, 3);
-    //(WEJSCIE,matematyka.minimumX,matematyka.maksimumX,matematyka.minimumY, matematyka.maksimumY);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,-10,500,-3, 3);
+
 
 }
 
@@ -171,12 +168,14 @@ void MainWindow::on_pushButton_2_clicked()
 {
     QLineSeries *dane =new QLineSeries();
 
-    //to jest przykladowa funkcja
-    matematyka.wejscieHeavyside(dane);
-    //--
+    for (int i=0; i<20000; i++)
+    {
+        double j=i/10;
+        dane->append(i, matematyka.heavysideInput(j));
+    }
+
     olchart->setData(WEJSCIE,dane);
-    olchart->ustawPrzedzialyWykresu(WEJSCIE,matematyka.minimumX,matematyka.maksimumX,
-                                    matematyka.minimumY, matematyka.maksimumY);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,-10,500,-3, 3);
 
 }
 
@@ -184,12 +183,14 @@ void MainWindow::on_pushButton_3_clicked()
 {
     QLineSeries *dane =new QLineSeries();
 
-    // to jest przykladowa funkcja
-    matematyka.wejscieSinus(dane);
-    //--
+    for (int i=0; i<20000; i++)
+    {
+
+        dane->append(i, matematyka.sinusInput(i));
+    }
+
     olchart->setData(WEJSCIE,dane);
-    olchart->ustawPrzedzialyWykresu(WEJSCIE,matematyka.minimumX,matematyka.maksimumX,
-                                    matematyka.minimumY, matematyka.maksimumY);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,-10,60,-3, 3);
 
 
 }
@@ -239,4 +240,15 @@ void MainWindow::on_pushButton_6_clicked()
     olchartDolny->setData(FAZOWY,nowe);
     ui->graphicsView_2->setChart(olchartDolny);    
 }
+
+
+void MainWindow::on_lineEdit_6_cursorPositionChanged()
+{
+    QString Tin_string = ui->lineEdit_6->text();
+    bool convertOK;
+    Tin = Tin_string.toInt(&convertOK);
+    matematyka.Tin=Tin;
+    
+}
+
 
