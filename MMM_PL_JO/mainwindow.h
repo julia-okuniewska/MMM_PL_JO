@@ -31,12 +31,14 @@ public:
     int b_0 = startPoint
     int b_1 = startPoint
     int T   = startPoint
+    int Tin = 10;
 
   QString textTransmitation;
 
     void createTextTransmitation();
     void display_remarks();
     void prepareButtons();
+    int sent_Tin();
 
 
 private slots:
@@ -64,6 +66,8 @@ private slots:
 
     void on_pushButton_6_clicked();
 
+
+    void on_lineEdit_6_cursorPositionChanged();
 
 private:
     Ui::MainWindow *ui;

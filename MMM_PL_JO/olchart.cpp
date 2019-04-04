@@ -4,6 +4,7 @@ olChart::olChart(type_of_chart typ_wykresu)
 {
     this->legend()->hide();
     daneNaWykresie = new QLineSeries();
+
     addSeries(daneNaWykresie);
 
 
@@ -12,14 +13,14 @@ olChart::olChart(type_of_chart typ_wykresu)
 
         linLinAxis();
         this->setTitle("Sygnał wejściowy");
-        ustawPrzedzialyWykresu(WEJSCIE, -10,20,-10,10);
+        ustawPrzedzialyWykresu(WEJSCIE, -10,200,-3,3);
         break;
 
     case WYJSCIE:
 
         linLinAxis();
         this->setTitle("Sygnał wyjściowy");
-        ustawPrzedzialyWykresu(WYJSCIE, -10,10,-10,110);
+        ustawPrzedzialyWykresu(WYJSCIE, -10,200,-50.02,50);
         break;
 
     case AMPLITUDOWY:

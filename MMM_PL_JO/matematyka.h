@@ -3,6 +3,9 @@
 
 #include <QtCharts>
 #include <QLineSeries>
+#include <cmath>
+
+
 
 class Matematyka
 {
@@ -13,6 +16,17 @@ public:
     void wejscieProstokatne(QLineSeries *values);
     void wejscieHeavyside(QLineSeries *values);
     void wejscieSinus(QLineSeries *values);
+
+
+    int rectangleInput (double i);
+    int heavysideInput(double i);
+    double sinusInput (double i);
+
+    double transmitationFun(double i);
+    double splotFun(double x);
+    double simpsonIntegration ( double xlast);
+    void fillsplot (double splot [2000] );
+    double splot ( double i);
     //------------------------------------------
 
     QLineSeries *obliczaneDane;
@@ -22,6 +36,8 @@ public:
 
     double minimumY = 20000;
     double maksimumY = -20000;
+    const int numberOfPoints = 200;
+    int Tin=10;
 
 private:
 
