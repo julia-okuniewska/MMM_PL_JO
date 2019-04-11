@@ -4,24 +4,25 @@
 Matematyka::Matematyka()
 {
 
-}
-
-int Matematyka::rectangleInput(double i)
-{        
-        int gorka = 1;
-        int dolinka= -1;
-        int faza=int(i)%Tin;
-        if(faza>Tin/2)
-        {
-            return gorka;
-        }
-        return dolinka;
+transformataOdwrotna();
 
 }
+
+int Matematyka:: rectangleInput(double x)
+{
+    int faza= int(x)%Tin;
+    if(faza<Tin/2)
+    {
+        return 1;
+    }
+    return -1;
+}
+
+
 
 double Matematyka::sinusInput (double i)
 {
-    return sin(Tin*i);
+    return sin(2*pi*i/Tin);
 }
 
 int Matematyka::heavysideInput(double i)
@@ -32,77 +33,36 @@ int Matematyka::heavysideInput(double i)
 }
 
 
-void Matematyka::wejscieProstokatne(QLineSeries *values)
+
+double Matematyka::rectangle1 (double i, char wybrane_wejscie)
 {
-    //  WYŁACZNIE PRZYKŁADOWE
-    double obliczaneY;
-    for (double i = -2; i < 1000; i += 2) {
-
-        for(double j = 0 ; j <=2 ; j+=0.01){
-
-            if (j == 0. || j == 1.) obliczaneY = 0.5;
-            else if(j>0 && j <1) obliczaneY = 1;
-            else obliczaneY = 0;
-
-            values->append(i+j, obliczaneY);
-        }
+    if(wybrane_wejscie=='r')
+        return pow (pow(e, -1*step*i*Tin/2) - 1 , 2)/ (step*i*(1- pow(e, -1*i*step*Tin)));
+    if(wybrane_wejscie=='h')
+        return 1/(i*step);
+    if(wybrane_wejscie=='s')
+    {
+        double w=2*pi/Tin;
+        return w/(i*step*i*step+w*w);
     }
-
-    minimumY  = -1;
-    maksimumY =  2;
-    maksimumX = 10;
+    return 1;
 }
 
-void Matematyka::wejscieHeavyside(QLineSeries *values)
-{
-    //  WYŁACZNIE PRZYKŁADOWE
-    for (double i = -1 ; i< 500 ; i+=0.01) {
 
-        if(i<0){
-            values->append(i,0);
-        }
-        else{
-            values->append(i,1);
-        }
-        minimumY = -2;
-        maksimumY = 2;
-    }
-
-    minimumX = -1;
-    maksimumX = 10;
-}
-
-void Matematyka::wejscieSinus(QLineSeries *values)
-{
-    //  WYŁACZNIE PRZYKŁADOWE
-    for (double i = 0; i < 4 * M_PI; i += (M_PI_4/2)) {
-
-        double calculated = sin(i);
-        checkMinimum(calculated);
-        checkMaksimum(calculated);
-        values->append(i,calculated);
-    }
-}
 double Matematyka::transmitationFun( double i)
 {
     if(i==0.) return 0;
-    double y= 1*i;
+    double y=1/(i);
     return y;
 }
 
 
 double Matematyka:: splotFun(double x)
 {
-    //double z=transmitationFun(x);
-    //double y=0;
-    return rectangleInput(x)*transmitationFun(x);
-//    for (double j=0; j<10; j=j+0.1){
-//        y += z*rectangleInput(x+j);
-//    }
-//    return y;
-    //return transmitationFun(x)*rectangleInput(x);
-
+    if(x==0.) return 0;
+    return transmitationFun(x)*rectangle1(x, 'r');
 }
+
 
 double Matematyka::simpsonIntegration (double xlast)
 {
@@ -110,25 +70,28 @@ double Matematyka::simpsonIntegration (double xlast)
     xfirst=0;
     y=0;
     sum=0;
-    dx=(xlast-xfirst)/numberOfPoints;
-    for (int i=1; i<=numberOfPoints; i++)
+    int N=10000;
+    dx=(xlast-xfirst)/N;
+    for (int i=1; i<=N; i++)
     {
         x = xfirst + i*dx;
         sum += splotFun(x-dx/2);
-        if (i< numberOfPoints)
+        if (i< N)
         {
-           y+= splotFun(x);
+           y = y+ splotFun(x);
         }
     }
     y = dx/6 * (splotFun(xfirst)+splotFun(xlast) + 2*y + 4*sum);
+
     return y;
 }
 
 
-double Matematyka::splot (double i )
+void Matematyka::transformataOdwrotna()
 {
-
-        return splotFun(i);
+    for(int i=0; i<numberOfPoints; i++){
+        outputData[i]=1/(2*3.14)*simpsonIntegration(i);
+    }
 }
 
 
@@ -138,9 +101,17 @@ void Matematyka::checkMinimum(double value)
     minimumY = value;
 }
 
-void Matematyka::checkMaksimum(double value)
+double Matematyka::checkMaksimum()
 {
-    if(value>maksimumY)
-    maksimumY = value;
+    maksimumY=0;
+    for (int i=0; i<numberOfPoints; i++){
+        if(outputData[i]>maksimumY){
+            maksimumY=outputData[i];
+        }
+    }
+    return maksimumY;
+
 
 }
+
+

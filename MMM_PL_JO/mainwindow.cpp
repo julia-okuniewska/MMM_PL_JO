@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    sent_data();
     delete ui;
 }
 
@@ -152,14 +153,14 @@ void MainWindow::on_pushButton_clicked()
 {
     QLineSeries *dane =new QLineSeries();
 
-    for (int i=0; i<20000; i++)
+    for (int i=0; i<max_time; i++)
     {
-        double j=i/10;
-        dane->append(i, matematyka.rectangleInput(j));
+
+        dane->append(i, matematyka.rectangleInput(i));
     }
 
     olchart->setData(WEJSCIE,dane);
-    olchart->ustawPrzedzialyWykresu(WEJSCIE,-10,500,-3, 3);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,-1*max_time/100,max_time,-1.5, 1.5);
 
 
 }
@@ -170,12 +171,12 @@ void MainWindow::on_pushButton_2_clicked()
 
     for (int i=0; i<20000; i++)
     {
-        double j=i/10;
+        double j=i/20;
         dane->append(i, matematyka.heavysideInput(j));
     }
 
     olchart->setData(WEJSCIE,dane);
-    olchart->ustawPrzedzialyWykresu(WEJSCIE,-10,500,-3, 3);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,-1*max_time/100,max_time,-1.5, 1.5);
 
 }
 
@@ -183,14 +184,14 @@ void MainWindow::on_pushButton_3_clicked()
 {
     QLineSeries *dane =new QLineSeries();
 
-    for (int i=0; i<20000; i++)
+    for (int i=0; i<max_time; i++)
     {
 
         dane->append(i, matematyka.sinusInput(i));
     }
 
     olchart->setData(WEJSCIE,dane);
-    olchart->ustawPrzedzialyWykresu(WEJSCIE,-10,60,-3, 3);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,-1*max_time/100,max_time,-1.5, 1.5);
 
 
 }
@@ -198,17 +199,11 @@ void MainWindow::on_pushButton_3_clicked()
 void MainWindow::on_pushButton_4_clicked()
 {
     olchartDolny = new olChart(WYJSCIE);
-
-    // to jest przykładowy przebieg
-    //QLineSeries *nowe = new QLineSeries();
-    //*nowe << QPointF(1.0, 1.0) << QPointF(2.0, 33.0) << QPointF(3.0, 28.0) << QPointF(4.0, 17.0)
-    //      << QPointF(5.0, 25.0) << QPointF(6.0, 43.0) << QPointF(10.0, 13.0);
-    //--
     QLineSeries *nowe =new QLineSeries();
     for (int i=0; i<20000; i++)
     {
-        double j=i/10;
-        nowe->append(i, matematyka.simpsonIntegration(j));
+
+        nowe->append(i, matematyka.outputData[i]);
     }
 
     olchartDolny->setData(WYJSCIE,nowe);
@@ -248,7 +243,15 @@ void MainWindow::on_lineEdit_6_cursorPositionChanged()
     bool convertOK;
     Tin = Tin_string.toInt(&convertOK);
     matematyka.Tin=Tin;
+
     
+}
+void MainWindow::sent_data()
+{
+    matematyka.Tin=Tin;
+    olchart->max_time=max_time;
+    matematyka.max_time=max_time;
+    maksimumY=matematyka.maksimumY;
 }
 
 
