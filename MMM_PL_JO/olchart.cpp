@@ -13,14 +13,14 @@ olChart::olChart(type_of_chart typ_wykresu)
 
         linLinAxis();
         this->setTitle("Sygnał wejściowy");
-        ustawPrzedzialyWykresu(WEJSCIE, -1*max_time/100,max_time,-3,3);
+        ustawPrzedzialyWykresu(WEJSCIE, -1,100,-3,3);
         break;
 
     case WYJSCIE:
 
         linLinAxis();
         this->setTitle("Sygnał wyjściowy");
-        ustawPrzedzialyWykresu(WYJSCIE, -1*max_time/100,max_time,-0.5,maksimumY);
+        ustawPrzedzialyWykresu(WYJSCIE, -1,100,-0.5,100);
         break;
 
     case AMPLITUDOWY:

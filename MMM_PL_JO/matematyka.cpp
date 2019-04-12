@@ -4,7 +4,8 @@
 Matematyka::Matematyka()
 {
 
-transformataOdwrotna();
+
+checkMaksimum();
 
 }
 
@@ -60,7 +61,7 @@ double Matematyka::transmitationFun( double i)
 double Matematyka:: splotFun(double x)
 {
     if(x==0.) return 0;
-    return transmitationFun(x)*rectangle1(x, 'r');
+    return transmitationFun(x*step)*rectangle1(x*step, typ_wejscia);
 }
 
 
@@ -70,7 +71,7 @@ double Matematyka::simpsonIntegration (double xlast)
     xfirst=0;
     y=0;
     sum=0;
-    int N=10000;
+    int N=20;
     dx=(xlast-xfirst)/N;
     for (int i=1; i<=N; i++)
     {
@@ -110,8 +111,6 @@ double Matematyka::checkMaksimum()
         }
     }
     return maksimumY;
-
-
 }
 
 

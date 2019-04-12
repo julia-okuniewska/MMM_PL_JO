@@ -31,8 +31,6 @@ public:
     void ustawPrzedzialyWykresu(type_of_chart typ_wykresu , double bottomX, double topX, double bottomY, double topY);
 
 
-    double max_time=100;
-    double maksimumY=100;
 
     type_of_chart typeOfChart;
     QLineSeries *daneNaWykresie;

@@ -27,6 +27,7 @@ public:
     double simpsonIntegration ( double xlast);
 
     double rectangle1 (double i, char wybrane_wejscie );
+    double checkMaksimum();
 
     //------------------------------------------
 
@@ -42,7 +43,8 @@ public:
     double pi = 3.1415;        //liczba PI
     int Tin=30;
     double max_time=100;
-    double step=max_time/numberOfPoints;
+    double step=0.01;            //max_time/numberOfPoints;
+    char typ_wejscia;
 
     double outputData[numberOfPoints];
 
@@ -50,7 +52,6 @@ public:
 private:
 
     void checkMinimum(double value);
-    double checkMaksimum();
 
 };
 

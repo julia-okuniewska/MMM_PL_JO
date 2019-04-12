@@ -151,6 +151,7 @@ void MainWindow::on_lineEdit_4_textChanged()
 
 void MainWindow::on_pushButton_clicked()
 {
+    matematyka.typ_wejscia = 'r';
     QLineSeries *dane =new QLineSeries();
 
     for (int i=0; i<max_time; i++)
@@ -167,6 +168,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    matematyka.typ_wejscia = 'h';
     QLineSeries *dane =new QLineSeries();
 
     for (int i=0; i<20000; i++)
@@ -174,7 +176,6 @@ void MainWindow::on_pushButton_2_clicked()
         double j=i/20;
         dane->append(i, matematyka.heavysideInput(j));
     }
-
     olchart->setData(WEJSCIE,dane);
     olchart->ustawPrzedzialyWykresu(WEJSCIE,-1*max_time/100,max_time,-1.5, 1.5);
 
@@ -182,6 +183,7 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_3_clicked()
 {
+    matematyka.typ_wejscia = 's';
     QLineSeries *dane =new QLineSeries();
 
     for (int i=0; i<max_time; i++)
@@ -198,6 +200,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButton_4_clicked()
 {
+    matematyka.transformataOdwrotna();
     olchartDolny = new olChart(WYJSCIE);
     QLineSeries *nowe =new QLineSeries();
     for (int i=0; i<20000; i++)
@@ -205,9 +208,12 @@ void MainWindow::on_pushButton_4_clicked()
 
         nowe->append(i, matematyka.outputData[i]);
     }
-
+    sent_data();
     olchartDolny->setData(WYJSCIE,nowe);
+    maksimumY = matematyka.checkMaksimum();
+    olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, -1*max_time/100, max_time, -1/maksimumY, maksimumY*1.05);
     ui->graphicsView_2->setChart(olchartDolny);
+
 }
 
 void MainWindow::on_pushButton_5_clicked()
@@ -249,9 +255,9 @@ void MainWindow::on_lineEdit_6_cursorPositionChanged()
 void MainWindow::sent_data()
 {
     matematyka.Tin=Tin;
-    olchart->max_time=max_time;
     matematyka.max_time=max_time;
     maksimumY=matematyka.maksimumY;
+    olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, -1*max_time/100, max_time, -1/maksimumY, maksimumY*1.05);
 }
 
 
