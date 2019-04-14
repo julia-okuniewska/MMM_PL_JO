@@ -33,7 +33,7 @@ public:
     int T   = startPoint
     int Tin = 10;
     double max_time = 100;
-    double maksimumY;
+    double maksimumY=2;
 
   QString textTransmitation;
 

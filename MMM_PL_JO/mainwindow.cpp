@@ -153,7 +153,7 @@ void MainWindow::on_pushButton_clicked()
 {
     matematyka.typ_wejscia = 'r';
     QLineSeries *dane =new QLineSeries();
-
+    matematyka.wypelnij_macierze();
     for (int i=0; i<max_time; i++)
     {
 
@@ -170,7 +170,7 @@ void MainWindow::on_pushButton_2_clicked()
 {
     matematyka.typ_wejscia = 'h';
     QLineSeries *dane =new QLineSeries();
-
+    matematyka.wypelnij_macierze();
     for (int i=0; i<20000; i++)
     {
         double j=i/20;
@@ -185,7 +185,7 @@ void MainWindow::on_pushButton_3_clicked()
 {
     matematyka.typ_wejscia = 's';
     QLineSeries *dane =new QLineSeries();
-
+    matematyka.wypelnij_macierze();
     for (int i=0; i<max_time; i++)
     {
 
@@ -200,19 +200,22 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButton_4_clicked()
 {
+
+    matematyka.wypelnij_macierze();
     matematyka.transformataOdwrotna();
     olchartDolny = new olChart(WYJSCIE);
     QLineSeries *nowe =new QLineSeries();
-    for (int i=0; i<20000; i++)
+    for (int i=0; i<matematyka.numberOfPoints; i++)
     {
-
+//        double t=i*max_time/2000;
+//        nowe->append(i, matematyka.wyliczanie_wyjscia(t));
         nowe->append(i, matematyka.outputData[i]);
     }
-    sent_data();
     olchartDolny->setData(WYJSCIE,nowe);
-    maksimumY = matematyka.checkMaksimum();
-    olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, -1*max_time/100, max_time, -1/maksimumY, maksimumY*1.05);
+    //maksimumY = matematyka.checkMaksimum();
+    olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, -1*max_time/100, max_time, -1*maksimumY/1000, maksimumY*1.05);
     ui->graphicsView_2->setChart(olchartDolny);
+    qDebug()<<matematyka.outputData[0]<<matematyka.outputData[1]<<matematyka.outputData[2];
 
 }
 
@@ -256,8 +259,11 @@ void MainWindow::sent_data()
 {
     matematyka.Tin=Tin;
     matematyka.max_time=max_time;
-    maksimumY=matematyka.maksimumY;
     olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, -1*max_time/100, max_time, -1/maksimumY, maksimumY*1.05);
+    matematyka.a_0=a_0;
+    matematyka.a_1=a_1;
+    matematyka.b_0=b_0;
+    matematyka.b_1=b_1;
 }
 
 
