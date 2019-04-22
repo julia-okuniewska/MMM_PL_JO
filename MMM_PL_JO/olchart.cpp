@@ -13,14 +13,14 @@ olChart::olChart(type_of_chart typ_wykresu)
 
         linLinAxis();
         this->setTitle("Sygnał wejściowy");
-        ustawPrzedzialyWykresu(WEJSCIE, -10,200,-3,3);
+        ustawPrzedzialyWykresu(WEJSCIE, -1,100,-3,3);
         break;
 
     case WYJSCIE:
 
         linLinAxis();
         this->setTitle("Sygnał wyjściowy");
-        ustawPrzedzialyWykresu(WYJSCIE, -10,200,-50.02,50);
+        ustawPrzedzialyWykresu(WYJSCIE, -1,100,-0.5,100);
         break;
 
     case AMPLITUDOWY:
@@ -106,3 +106,5 @@ void olChart::loglogAxis()
     this->addAxis(laxisX, Qt::AlignBottom);
     this->addAxis(laxisY, Qt::AlignLeft);
 }
+
+

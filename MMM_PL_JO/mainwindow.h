@@ -32,13 +32,15 @@ public:
     int b_1 = startPoint
     int T   = startPoint
     int Tin = 10;
+    double max_time = 100;
+    double maksimumY=2;
 
   QString textTransmitation;
 
     void createTextTransmitation();
     void display_remarks();
     void prepareButtons();
-    int sent_Tin();
+    void sent_data();
 
 
 private slots:

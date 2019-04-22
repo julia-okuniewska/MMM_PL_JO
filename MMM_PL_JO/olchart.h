@@ -30,6 +30,8 @@ public:
 
     void ustawPrzedzialyWykresu(type_of_chart typ_wykresu , double bottomX, double topX, double bottomY, double topY);
 
+
+
     type_of_chart typeOfChart;
     QLineSeries *daneNaWykresie;
 
