@@ -76,7 +76,20 @@ void Matematyka::transformataOdwrotna()
 {
     for(int i=0; i<numberOfPoints; i++){
         outputData[i]=wyliczanie_wyjscia(i*step);
+        qDebug()<<outputData[i];
     }
+}
+
+std::complex<double> Matematyka::transmitationFun(double omega)
+{
+    std::complex<double> licznik;
+    std::complex<double> mianownik;
+    std::complex<double> j(0,1);
+    licznik = b_1*j*omega + b_0;
+    mianownik = j*j*omega*omega + a_1*j*omega+a_0;
+
+   return licznik/mianownik;
+
 }
 
 
@@ -92,6 +105,71 @@ double Matematyka::checkMaksimum()
     }
     return maksimumY;
 }
+
+void Matematyka::amplitudeSpectrum()
+{
+    maksimumRange = -10000;
+    minimumRange = 10000;
+    obliczaneDane = new QLineSeries();
+       std::complex<double> yValue;
+       double amplitude;
+       for(double omega = 0.1; omega < 10000 ; omega *= 10){
+           for(double i = 1; i <10 ; i++){
+               yValue = transmitationFun(omega*i);
+               amplitude = 20*log(abs(yValue));
+               obliczaneDane->append(omega*i,amplitude);
+               spectrumMaxMin(AMPLITUDE, amplitude);
+           }
+       }
+}
+
+void Matematyka::phaseSpectrum()
+{
+    maksimumRange = -10000;
+    minimumRange = 10000;
+    obliczaneDane = new QLineSeries();
+    std::complex<double> yValue;
+    double argument;
+    for(double omega = 0.1; omega < 10000 ; omega *= 10){
+        for(double i = 1; i <10 ; i++){
+            yValue = transmitationFun(omega*i);
+             argument = (arg(yValue)*180)/M_PI;
+             obliczaneDane->append(omega,argument);
+             qDebug()<<"dla omega = "<<omega*i<<"argument = "<< argument;
+             spectrumMaxMin(PHASE,argument);
+        }
+    }
+}
+
+void Matematyka::spectrumMaxMin(int type, double value)
+{
+    if(value < minimumRange){
+        minimumRange = value;
+    }
+    if(value > maksimumRange){
+        maksimumRange = value;
+        maksimumRange = (floor((maksimumRange/type))+1)*type;
+
+        if(maksimumRange<=0){
+            switch(type){
+            case AMPLITUDE:
+                maksimumRange = 20;
+                break;
+            case PHASE:
+                maksimumRange = 45;
+                break;
+            }
+        }
+    }
+
+    if (minimumRange<0)
+        minimumRange = (floor((minimumRange/type)))*type;
+    else
+        minimumRange = (floor((minimumRange/type))+1)*type;
+
+}
+
+
 
 void Matematyka::wypelnij_macierze ()
 {

@@ -5,13 +5,18 @@
 #include <QLineSeries>
 #include <cmath>
 #include <QDebug>
+#include <complex>
+
+#define AMPLITUDE 20
+#define PHASE 45
+
+
 
 
 class Matematyka
 {
 public:
     Matematyka();
-
 
 
 
@@ -22,12 +27,15 @@ public:
 
     void transformataOdwrotna();
 
-    double transmitationFun(double i);
-    double splotFun(double x);
-    double simpsonIntegration ( double xlast);
+    std::complex<double> transmitationFun(double omega);
 
+    double simpsonIntegration ( double xlast);
     double rectangle1 (double t, char wybrane_wejscie );
     double checkMaksimum();
+
+    void amplitudeSpectrum();
+    void phaseSpectrum();
+    void spectrumMaxMin(int type, double value);
 
     void MatrixMultiplication (double Matrix1[2][2], double Matrix2[2][2], double outMatrix[2][2]);
     void MatrixAdd(double Matrix1[2][2], double Matrix2[2][2], double outMatrix[2][2]);
@@ -46,7 +54,7 @@ public:
     QLineSeries *obliczaneDane;
 
 
-    const static int numberOfPoints = 5000;
+    const static int numberOfPoints = 1000;
     const double e = 2.72;         //liczba Eulera
     const double pi = 3.1415;        //liczba PI
     int Tin=30;
@@ -73,6 +81,9 @@ public:
     double a_1=10;
     double b_0=10;
     double b_1=10;
+
+    double minimumRange = 1000;
+    double maksimumRange = -1000;
 
 
 

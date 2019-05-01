@@ -117,6 +117,7 @@ void MainWindow::on_lineEdit_2_textChanged()
     a_0 = a_0_string.toInt(&convertOK);
     display_remarks();
     createTextTransmitation();
+    matematyka.a_0 = this->a_0;
 
 }
 
@@ -127,6 +128,7 @@ void MainWindow::on_lineEdit_8_textChanged()
     b_1 = b_1_string.toInt(&convertOK);
     display_remarks();
     createTextTransmitation();
+    matematyka.b_1 = this->b_1;
 }
 
 
@@ -137,6 +139,7 @@ void MainWindow::on_lineEdit_3_textChanged()
     b_0 = b_0_string.toInt(&convertOK);
     display_remarks();
     createTextTransmitation();
+    matematyka.b_0 = this->b_0;
 }
 
 void MainWindow::on_lineEdit_4_textChanged()
@@ -203,17 +206,19 @@ void MainWindow::on_pushButton_4_clicked()
 
     matematyka.wypelnij_macierze();
     matematyka.transformataOdwrotna();
+
+    qDebug()<<"maksy = "<<maksimumY;
+
     olchartDolny = new olChart(WYJSCIE);
     QLineSeries *nowe =new QLineSeries();
-    for (int i=0; i<matematyka.numberOfPoints; i++)
+
+    for (int i=0; i< matematyka.numberOfPoints ; i++)
     {
-//        double t=i*max_time/2000;
-//        nowe->append(i, matematyka.wyliczanie_wyjscia(t));
         nowe->append(i, matematyka.outputData[i]);
+
     }
     olchartDolny->setData(WYJSCIE,nowe);
-    //maksimumY = matematyka.checkMaksimum();
-    olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, -1*max_time/100, max_time, -1*maksimumY/1000, maksimumY*1.05);
+    olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, 0, max_time, -1*maksimumY/1000, maksimumY*1.05);
     ui->graphicsView_2->setChart(olchartDolny);
     qDebug()<<matematyka.outputData[0]<<matematyka.outputData[1]<<matematyka.outputData[2];
 
@@ -222,26 +227,36 @@ void MainWindow::on_pushButton_4_clicked()
 void MainWindow::on_pushButton_5_clicked()
 {
     olchartDolny = new olChart(AMPLITUDOWY);
-
-    // to jest przykładowy przebieg
     QLineSeries *nowe = new QLineSeries();
-    *nowe << QPointF(1.0, 1.0) << QPointF(2.0, 73.0) << QPointF(3.0, 268.0) << QPointF(4.0, 17.0)
-          << QPointF(5.0, 4325.0) << QPointF(6.0, 723.0) << QPointF(100.0, 723.0);
-    //--
+
+
+    matematyka.amplitudeSpectrum();
+    nowe = matematyka.obliczaneDane;
+
     olchartDolny->setData(AMPLITUDOWY,nowe);
+    olchartDolny->ustawPrzedzialyWykresu(AMPLITUDOWY,0.01,10000,matematyka.minimumRange,matematyka.maksimumRange);
+
+    int range = int(((abs(matematyka.maksimumRange)+abs(matematyka.minimumRange)))/20);
+    olchartDolny->axisY->setTickCount(range+1);
+
     ui->graphicsView_2->setChart(olchartDolny);
 
 }
 
 void MainWindow::on_pushButton_6_clicked()
 {
-    olchartDolny = new olChart(FAZOWY);
-
-    // to jest przykładowy przebieg
+    olchartDolny = new olChart(FAZOWY);    
     QLineSeries *nowe = new QLineSeries();
-    *nowe << QPointF(3,300) << QPointF(40,500) << QPointF(44,550) << QPointF(94,1000);
-    //--
+
+    matematyka.phaseSpectrum();
+    nowe = matematyka.obliczaneDane;
+
     olchartDolny->setData(FAZOWY,nowe);
+    olchartDolny->ustawPrzedzialyWykresu(FAZOWY,0.01,10000,matematyka.minimumRange,matematyka.maksimumRange);
+
+    int range = int(((abs(matematyka.maksimumRange)+abs(matematyka.minimumRange)))/40);
+    olchartDolny->axisY->setTickCount(range+1);
+
     ui->graphicsView_2->setChart(olchartDolny);    
 }
 

@@ -32,18 +32,20 @@ public:
 
 
 
+
     type_of_chart typeOfChart;
     QLineSeries *daneNaWykresie;
 
-
-private:
     QValueAxis *axisX;
     QValueAxis *axisY;
     QLogValueAxis *laxisX;
     QLogValueAxis *laxisY;
 
+    private:
+
     void linLinAxis();
     void loglogAxis();
+    void loglinAxis();
 };
 
 #endif // OLCHART_H

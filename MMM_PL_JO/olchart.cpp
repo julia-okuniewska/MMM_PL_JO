@@ -25,21 +25,21 @@ olChart::olChart(type_of_chart typ_wykresu)
 
     case AMPLITUDOWY:
 
-        loglogAxis();
+        loglinAxis();
         this->setTitle("Charakterystyka Amplitudowa");
-        laxisY->setTitleText("Amplituda [dB]");
+        axisY->setTitleText("Amplituda [dB]");
         laxisX->setTitleText("Częstotliwość [rad/s]");
-        ustawPrzedzialyWykresu(AMPLITUDOWY, -10,200,-10,100);
+        ustawPrzedzialyWykresu(AMPLITUDOWY, 0.001,200,-10,100);
 
         break;
 
     case FAZOWY:
 
-        loglogAxis();
+        loglinAxis();
         this->setTitle("Charakterystyka Fazowa");
-        laxisY->setTitleText("Faza [stopnie]");
+        axisY->setTitleText("Faza [stopnie]");
         laxisX->setTitleText("Częstotliwość [rad/s]");
-        ustawPrzedzialyWykresu(FAZOWY, -10,30,-10,10);
+        ustawPrzedzialyWykresu(FAZOWY, 0.001,30,-10,10);
 
         break;
     }
@@ -59,7 +59,7 @@ void olChart::setData(type_of_chart typ_wykresu, QLineSeries *danePrzekazane)
     }
     else {
         daneNaWykresie->attachAxis(laxisX);
-        daneNaWykresie->attachAxis(laxisY);
+        daneNaWykresie->attachAxis(axisY);
     }
 }
 
@@ -72,7 +72,7 @@ void olChart::ustawPrzedzialyWykresu(type_of_chart typ_wykresu, double bottomX, 
     }
     else {
         laxisX->setRange(bottomX,topX);
-        laxisY->setRange(bottomY,topY);
+        axisY->setRange(bottomY,topY);
     }
 }
 
@@ -105,6 +105,19 @@ void olChart::loglogAxis()
 
     this->addAxis(laxisX, Qt::AlignBottom);
     this->addAxis(laxisY, Qt::AlignLeft);
+}
+
+void olChart::loglinAxis()
+{
+     laxisX = new QLogValueAxis();
+     axisY = new QValueAxis();
+     laxisX->setBase(10.0);
+     this->addAxis(laxisX, Qt::AlignBottom);
+     this->addAxis(axisY, Qt::AlignLeft);
+     laxisX->setMinorTickCount(9);
+     axisY->setMinorTickCount(2);
+  //   axisY->setTickCount(3);
+
 }
 
 
