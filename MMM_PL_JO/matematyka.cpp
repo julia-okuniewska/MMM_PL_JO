@@ -134,7 +134,7 @@ void Matematyka::phaseSpectrum()
         for(double i = 1; i <10 ; i++){
             yValue = transmitationFun(omega*i);
              argument = (arg(yValue)*180)/M_PI;
-             obliczaneDane->append(omega,argument);
+             obliczaneDane->append(omega*i,argument);
              qDebug()<<"dla omega = "<<omega*i<<"argument = "<< argument;
              spectrumMaxMin(PHASE,argument);
         }
