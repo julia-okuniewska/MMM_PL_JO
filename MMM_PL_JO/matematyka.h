@@ -46,7 +46,7 @@ public:
 
     void wypelnij_macierze();
     
-    void calkowanie (double i);
+    void calkowanie ();
     double wyliczanie_wyjscia (double t);
 
     //------------------------------------------
@@ -59,7 +59,8 @@ public:
     const double pi = 3.1415;        //liczba PI
     int Tin=30;
     double max_time=100;
-    double step=max_time/numberOfPoints;            //max_time/numberOfPoints;
+    double step=0.05;
+            //max_time/numberOfPoints;            //max_time/numberOfPoints;
     char typ_wejscia;
     double outputData[numberOfPoints];
     

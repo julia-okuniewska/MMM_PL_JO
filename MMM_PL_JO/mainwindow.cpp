@@ -160,7 +160,7 @@ void MainWindow::on_pushButton_clicked()
     for (int i=0; i<max_time; i++)
     {
 
-        dane->append(i, matematyka.rectangleInput(i));
+        dane->append(i, matematyka.rectangle1(i,'r'));
     }
 
     olchart->setData(WEJSCIE,dane);
@@ -174,10 +174,11 @@ void MainWindow::on_pushButton_2_clicked()
     matematyka.typ_wejscia = 'h';
     QLineSeries *dane =new QLineSeries();
     matematyka.wypelnij_macierze();
-    for (int i=0; i<20000; i++)
+    for (int i=0; i<matematyka.numberOfPoints; i++)
     {
-        double j=i/20;
-        dane->append(i, matematyka.heavysideInput(j));
+       // double j=i/max_time;
+        double j=i;
+        dane->append(i, matematyka.rectangle1(i,'h'));
     }
     olchart->setData(WEJSCIE,dane);
     olchart->ustawPrzedzialyWykresu(WEJSCIE,-1*max_time/100,max_time,-1.5, 1.5);
@@ -189,10 +190,10 @@ void MainWindow::on_pushButton_3_clicked()
     matematyka.typ_wejscia = 's';
     QLineSeries *dane =new QLineSeries();
     matematyka.wypelnij_macierze();
-    for (int i=0; i<max_time; i++)
+    for (int i=0; i<matematyka.numberOfPoints; i++)
     {
-
-        dane->append(i, matematyka.sinusInput(i));
+        double j=i;
+        dane->append(i, matematyka.rectangle1(i,'s'));
     }
 
     olchart->setData(WEJSCIE,dane);
@@ -207,20 +208,22 @@ void MainWindow::on_pushButton_4_clicked()
     matematyka.wypelnij_macierze();
     matematyka.transformataOdwrotna();
 
-    qDebug()<<"maksy = "<<maksimumY;
+   // qDebug()<<"maksy = "<<maksimumY;
 
     olchartDolny = new olChart(WYJSCIE);
     QLineSeries *nowe =new QLineSeries();
-
-    for (int i=0; i< matematyka.numberOfPoints ; i++)
+    for (int i=0; i< matematyka.numberOfPoints +T; i++)
     {
-        nowe->append(i, matematyka.outputData[i]);
+        if(i<T)
+        nowe->append(i, 0);
+        else
+        nowe->append(i, matematyka.outputData[i-T]);
 
     }
     olchartDolny->setData(WYJSCIE,nowe);
-    olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, 0, max_time, -1*maksimumY/1000, maksimumY*1.05);
+    olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, -1*max_time/100, max_time, -3, 3);
     ui->graphicsView_2->setChart(olchartDolny);
-    qDebug()<<matematyka.outputData[0]<<matematyka.outputData[1]<<matematyka.outputData[2];
+    //qDebug()<<matematyka.outputData[0]<<matematyka.outputData[1]<<matematyka.outputData[2];
 
 }
 
@@ -272,6 +275,7 @@ void MainWindow::on_lineEdit_6_cursorPositionChanged()
 }
 void MainWindow::sent_data()
 {
+    //matematyka.T=T;
     matematyka.Tin=Tin;
     matematyka.max_time=max_time;
     olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, -1*max_time/100, max_time, -1/maksimumY, maksimumY*1.05);

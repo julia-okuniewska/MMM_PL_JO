@@ -26,6 +26,7 @@ int Matematyka::heavysideInput(double i)
 {
     if(i>0)
         return 1;
+    if(i==0.)
     return 0;
 }
 
@@ -34,7 +35,7 @@ double Matematyka::rectangle1 (double t, char wybrane_wejscie)
 {
     if(wybrane_wejscie=='r')
     {
-        rectangleInput(t);                                                      //pow (pow(e, -1*i*Tin/2) - 1 , 2)/ (i*(1- pow(e, -1*i*Tin)));
+        return rectangleInput(t);                                                      //pow (pow(e, -1*i*Tin/2) - 1 , 2)/ (i*(1- pow(e, -1*i*Tin)));
     }
 
     if(wybrane_wejscie=='h')
@@ -71,14 +72,6 @@ double Matematyka::simpsonIntegration (double xlast)
     return y;
 }
 
-
-void Matematyka::transformataOdwrotna()
-{
-    for(int i=0; i<numberOfPoints; i++){
-        outputData[i]=wyliczanie_wyjscia(i*step);
-        qDebug()<<outputData[i];
-    }
-}
 
 std::complex<double> Matematyka::transmitationFun(double omega)
 {
@@ -250,13 +243,20 @@ void Matematyka::MatrixInverse (double (*inMatrix)[2],  double (*outMatrix)[2])
 
 }
 
+void Matematyka::transformataOdwrotna()
+{
+    for(int i=0; i<numberOfPoints; i++){
+        outputData[i]=wyliczanie_wyjscia(i);
+        //qDebug()<<outputData[i];
+    }
+}
 
 
 double Matematyka::wyliczanie_wyjscia (double t)
 {
     double wyjscie;
     wypelnijMacierzDX(t);
-    calkowanie(t);
+    calkowanie();
     MatrixMultiplication(MatrixC, MatrixX, outputMatrix);
     wyjscie=outputMatrix[0][0];
     return wyjscie;
@@ -265,14 +265,14 @@ double Matematyka::wyliczanie_wyjscia (double t)
 void Matematyka::wypelnijMacierzDX(double t)
 {
     MatrixMultiplication(MatrixA, MatrixX, TemporaryMatrix0);
-    MatrixConstMult(MatrixB, rectangle1(t*step, typ_wejscia), TemporaryMatrix1);
+    MatrixConstMult(MatrixB, rectangle1(t, typ_wejscia), TemporaryMatrix1);
     MatrixAdd(TemporaryMatrix0, TemporaryMatrix1, dxMatrix);
 }
 
 
-void Matematyka::calkowanie(double i)
+void Matematyka::calkowanie()
 {
-    MatrixConstMult(dxMatrix, i*step, TemporaryMatrix0);
+    MatrixConstMult(dxMatrix, step, TemporaryMatrix0);
     MatrixAdd(TemporaryMatrix0, MatrixX, MatrixX);
 }
 
