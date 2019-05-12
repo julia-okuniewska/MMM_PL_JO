@@ -34,6 +34,7 @@ public:
     int Tin = 10;
     double max_time = 100;
     double maksimumY=2;
+    bool czy_na_granicy = false;
 
 
   QString textTransmitation;
@@ -42,16 +43,18 @@ public:
     void display_remarks();
     void prepareButtons();
     void sent_data();
+    bool check_stability();
+    void display_stability();
 
 
 private slots:
-    void on_lineEdit_textChanged();
+    void on_a1_textChanged();
 
-    void on_lineEdit_2_textChanged();
+    void on_a0_textChanged();
 
-    void on_lineEdit_8_textChanged();
+    void on_b1_textChanged();
 
-    void on_lineEdit_3_textChanged();
+    void on_b0_textChanged();
 
     void on_lineEdit_4_textChanged();
 

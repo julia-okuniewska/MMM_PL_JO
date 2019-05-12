@@ -62,7 +62,7 @@ public:
     const double pi = 3.1415;        //liczba PI
     int Tin=30;
     double max_time=100;
-    double step=0.05;
+    double step=0.1;
             //max_time/numberOfPoints;            //max_time/numberOfPoints;
     char typ_wejscia;
     double outputData[numberOfPoints];

@@ -15,6 +15,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     olchart = new olChart(WEJSCIE);
     ui->graphicsView->setChart(olchart);
+    ui->a1->setText("10");
+    ui->b1->setText("10");
+    ui->a0->setText("10");
+    ui->b0->setText("10");
+    ui->lineEdit_4->setText("0");
+    display_stability();
+
 
 }
 
@@ -100,30 +107,33 @@ void MainWindow::prepareButtons()
 
 }
 
-void MainWindow::on_lineEdit_textChanged()
+void MainWindow::on_a1_textChanged()
 {
-    QString a_1_string = ui->lineEdit->text();
+    QString a_1_string = ui->a1->text();
     bool convertOK;
     a_1 = a_1_string.toInt(&convertOK);
     display_remarks();
+    display_stability();
     createTextTransmitation();
+    display_stability();
 
 }
 
-void MainWindow::on_lineEdit_2_textChanged()
+void MainWindow::on_a0_textChanged()
 {
-    QString a_0_string = ui->lineEdit_2->text();
+    QString a_0_string = ui->a0->text();
     bool convertOK;
     a_0 = a_0_string.toInt(&convertOK);
     display_remarks();
+    display_stability();
     createTextTransmitation();
     matematyka.a_0 = this->a_0;
 
 }
 
-void MainWindow::on_lineEdit_8_textChanged()
+void MainWindow::on_b1_textChanged()
 {
-    QString b_1_string = ui->lineEdit_8->text();
+    QString b_1_string = ui->b1->text();
     bool convertOK;
     b_1 = b_1_string.toInt(&convertOK);
     display_remarks();
@@ -132,14 +142,15 @@ void MainWindow::on_lineEdit_8_textChanged()
 }
 
 
-void MainWindow::on_lineEdit_3_textChanged()
+void MainWindow::on_b0_textChanged()
 {
-    QString b_0_string = ui->lineEdit_3->text();
+    QString b_0_string = ui->b0->text();
     bool convertOK;
     b_0 = b_0_string.toInt(&convertOK);
     display_remarks();
     createTextTransmitation();
     matematyka.b_0 = this->b_0;
+
 }
 
 void MainWindow::on_lineEdit_4_textChanged()
@@ -215,7 +226,7 @@ void MainWindow::on_pushButton_4_clicked()
 
     olchartDolny = new olChart(WYJSCIE);
     QLineSeries *nowe =new QLineSeries();
-    for (int i=0; i< matematyka.numberOfPoints +T; i++)
+    for (int i=0; i< matematyka.max_time +T; i++)       // to samo dla numberOfPoints i ma_time...  DOŚĆ ZASTANAWIAJĄCE
     {
         if(i<T)
         nowe->append(i, 0);
@@ -224,7 +235,7 @@ void MainWindow::on_pushButton_4_clicked()
 
     }
     olchartDolny->setData(WYJSCIE,nowe);
-    olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, -1, max_time, matematyka.checkMinimum()-1, matematyka.checkMaksimum()+1);
+    olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, -1, max_time, matematyka.checkMinimum()*1.1, matematyka.checkMaksimum()*1.1);
     ui->graphicsView_2->setChart(olchartDolny);
     //qDebug()<<matematyka.outputData[0]<<matematyka.outputData[1]<<matematyka.outputData[2];
 
@@ -295,4 +306,40 @@ void MainWindow::sent_data()
     matematyka.b_1=b_1;
 }
 
+bool MainWindow::check_stability(){
+    if(a_0>0 && a_1>0)
+    {
+        return true;
+    }
+    if(a_0==0 && a_1==0)
+    {
+        czy_na_granicy=true;
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void MainWindow::display_stability()
+{
+
+    QString stabilnosc;
+    if(check_stability() && !czy_na_granicy)
+    {
+        stabilnosc="tak";
+    }
+    if(check_stability() && czy_na_granicy)
+    {
+        stabilnosc="na granicy";
+    }
+    if(!check_stability())
+    {
+        stabilnosc="nie";
+    }
+
+    ui->stability->setText("         ");
+    ui->stability->setText(stabilnosc);
+
+}
 

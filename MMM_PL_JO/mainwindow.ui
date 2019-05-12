@@ -51,7 +51,7 @@
       <rect>
        <x>20</x>
        <y>30</y>
-       <width>277</width>
+       <width>280</width>
        <height>125</height>
       </rect>
      </property>
@@ -72,7 +72,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit">
+         <widget class="QLineEdit" name="a1">
           <property name="minimumSize">
            <size>
             <width>100</width>
@@ -105,7 +105,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_2">
+         <widget class="QLineEdit" name="a0">
           <property name="maximumSize">
            <size>
             <width>100</width>
@@ -132,7 +132,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_8">
+         <widget class="QLineEdit" name="b1">
           <property name="maximumSize">
            <size>
             <width>100</width>
@@ -159,7 +159,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_3">
+         <widget class="QLineEdit" name="b0">
           <property name="maximumSize">
            <size>
             <width>100</width>
@@ -201,19 +201,25 @@
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
          <widget class="QLabel" name="label_5">
+          <property name="minimumSize">
+           <size>
+            <width>55</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
-            <width>50</width>
+            <width>65</width>
             <height>16777215</height>
            </size>
           </property>
           <property name="text">
-           <string> stabilność  </string>
+           <string>stabilny:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_5">
+         <widget class="QLineEdit" name="stability">
           <property name="maximumSize">
            <size>
             <width>75</width>
