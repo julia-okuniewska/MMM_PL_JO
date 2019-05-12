@@ -30,7 +30,7 @@ public:
     int a_1 = startPoint
     int b_0 = startPoint
     int b_1 = startPoint
-    int T   = 0;
+    double T   = 0;
     int Tin = 10;
     double max_time = 100;
     double maksimumY=2;

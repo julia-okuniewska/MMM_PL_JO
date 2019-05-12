@@ -62,13 +62,13 @@ void MainWindow::display_remarks()
     {
         mistake += " b1";
     }
-    if(T==0)
+    if(T==0.0)
     {
         mistake += " T";
     }
     ui->remarks->setText(mistake);
 
-    if(a_0 != 0 && a_1 != 0 && b_0 != 0 && b_1 != 0 && T!=0)
+    if(a_0 != 0 && a_1 != 0 && b_0 != 0 && b_1 != 0 && T!=0.0)
 
 
         ui->remarks->setText(" ");
@@ -146,9 +146,10 @@ void MainWindow::on_lineEdit_4_textChanged()
 {
     QString T_string = ui->lineEdit_4->text();
     bool convertOK;
-    T = T_string.toInt(&convertOK);
+    T = T_string.toDouble(&convertOK);
     display_remarks();
     createTextTransmitation();
+    matematyka.T = this->T;
 }
 
 
@@ -207,7 +208,9 @@ void MainWindow::on_pushButton_4_clicked()
 
     matematyka.wypelnij_macierze();         //OUTPUT
     matematyka.transformataOdwrotna();
-    T=T%100;
+    T = floor(T);
+    T=int(T)%100;
+
    // qDebug()<<"maksy = "<<maksimumY;
 
     olchartDolny = new olChart(WYJSCIE);
@@ -217,7 +220,7 @@ void MainWindow::on_pushButton_4_clicked()
         if(i<T)
         nowe->append(i, 0);
         else
-        nowe->append(i, matematyka.outputData[i-T]);
+        nowe->append(i, matematyka.outputData[i-int(T)]);
 
     }
     olchartDolny->setData(WYJSCIE,nowe);
@@ -237,7 +240,7 @@ void MainWindow::on_pushButton_5_clicked()
     nowe = matematyka.obliczaneDane;
 
     olchartDolny->setData(AMPLITUDOWY,nowe);
-    olchartDolny->ustawPrzedzialyWykresu(AMPLITUDOWY,0.01,10000,matematyka.minimumRange,matematyka.maksimumRange);
+    olchartDolny->ustawPrzedzialyWykresu(AMPLITUDOWY,0.1,10000,matematyka.minimumRange,matematyka.maksimumRange);
 
     int range = int(((abs(matematyka.maksimumRange)+abs(matematyka.minimumRange)))/20);
     olchartDolny->axisY->setTickCount(range+1);
@@ -255,11 +258,17 @@ void MainWindow::on_pushButton_6_clicked()
     nowe = matematyka.obliczaneDane;
 
     olchartDolny->setData(FAZOWY,nowe);
-    olchartDolny->ustawPrzedzialyWykresu(FAZOWY,0.01,10000,matematyka.minimumRange,matematyka.maksimumRange);
 
+    olchartDolny->ustawPrzedzialyWykresu(FAZOWY,0.1,10000,matematyka.minimumRange,matematyka.maksimumRange);
+
+    if(matematyka.minimumRange>720)
+    {
     int range = int(((abs(matematyka.maksimumRange)+abs(matematyka.minimumRange)))/40);
     olchartDolny->axisY->setTickCount(range+1);
-
+    }
+    else {
+        olchartDolny->axisY->setTickCount(2);
+    }
     ui->graphicsView_2->setChart(olchartDolny);    
 }
 

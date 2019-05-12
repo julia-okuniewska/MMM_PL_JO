@@ -78,10 +78,12 @@ std::complex<double> Matematyka::transmitationFun(double omega)
     std::complex<double> licznik;
     std::complex<double> mianownik;
     std::complex<double> j(0,1);
+    std::complex<double> expo(e,0);
     licznik = b_1*j*omega + b_0;
     mianownik = j*j*omega*omega + a_1*j*omega+a_0;
 
-   return licznik/mianownik;
+
+   return (licznik/mianownik)*pow(e,(-j*omega*T));
 
 }
 
@@ -134,17 +136,49 @@ void Matematyka::phaseSpectrum()
     maksimumRange = -10000;
     minimumRange = 10000;
     obliczaneDane = new QLineSeries();
+
+    int vecIterator = 0;
+    double odejmowane = 0;
+    bool przeskok = 0;
+
     std::complex<double> yValue;
     double argument;
     for(double omega = 0.1; omega < 10000 ; omega *= 10){
-        for(double i = 1; i <10 ; i++){
-            yValue = transmitationFun(omega*i);
-             argument = (arg(yValue)*180)/M_PI;
+        for(double i = 1; i <10 ; i++)
+        {
+             yValue = transmitationFun(omega*i);
+             argument = (atan2(yValue.imag(),yValue.real())*180)/M_PI;
+
+             if(vecIterator != 0)
+             {
+                 if( (argument * obliczaneDane->at(vecIterator - 1).y()) < 0)
+                 {
+                     if(przeskok == 0){
+                         odejmowane += (2 * 180);
+                         przeskok = 1;
+                     }
+                 }
+                 else
+                 {
+                     przeskok = 0;
+                 }
+
+
+             }
+             qDebug()<<"argument przed "<<argument;
+             argument = argument - odejmowane;
              obliczaneDane->append(omega*i,argument);
-             qDebug()<<"dla omega = "<<omega*i<<"argument = "<< argument;
+             qDebug()<<"odejmowane = "<<odejmowane;
+
+             //tak, są
+            //   qDebug()<<"czy obliczane dane = "<<obliczaneDane->at(vecIterator)<<"sa rowne "<<unfolding->at(vecIterator);
+
+             qDebug()<<"dla omega = "<<omega*i<<"argument = "<< argument<<endl;
              spectrumMaxMin(PHASE,argument);
+             vecIterator++;
         }
     }
+    qDebug()<<endl<<endl<<endl;
 }
 
 void Matematyka::spectrumMaxMin(int type, double value)

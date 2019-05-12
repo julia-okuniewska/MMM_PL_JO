@@ -6,6 +6,7 @@
 #include <cmath>
 #include <QDebug>
 #include <complex>
+#include <QVector>
 
 #define AMPLITUDE 20
 #define PHASE 45
@@ -55,6 +56,7 @@ public:
     QLineSeries *obliczaneDane;
 
 
+
     const static int numberOfPoints = 1000;
     const double e = 2.72;         //liczba Eulera
     const double pi = 3.1415;        //liczba PI
@@ -83,6 +85,7 @@ public:
     double a_1=10;
     double b_0=10;
     double b_1=10;
+    double T = 0;
 
     double minimumRange = 1000;
     double maksimumRange = -1000;
