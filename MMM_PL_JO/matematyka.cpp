@@ -99,6 +99,19 @@ double Matematyka::checkMaksimum()
     return maksimumY;
 }
 
+double Matematyka::checkMinimum()
+{
+    double minimum=0;
+    for (int i=0; i<numberOfPoints; i++)
+    {
+        if(outputData[i]<minimum)
+        {
+            minimum=outputData[i];
+        }
+    }
+    return minimum;
+}
+
 void Matematyka::amplitudeSpectrum()
 {
     maksimumRange = -10000;

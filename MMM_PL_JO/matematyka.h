@@ -32,6 +32,7 @@ public:
     double simpsonIntegration ( double xlast);
     double rectangle1 (double t, char wybrane_wejscie );
     double checkMaksimum();
+    double checkMinimum();
 
     void amplitudeSpectrum();
     void phaseSpectrum();
