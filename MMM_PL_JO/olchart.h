@@ -29,6 +29,7 @@ public:
     void setData(type_of_chart typ_wykresu, QLineSeries *danePrzekazane);
 
     void ustawPrzedzialyWykresu(type_of_chart typ_wykresu , double bottomX, double topX, double bottomY, double topY);
+    void ustawPrzedzialyWykresu2(type_of_chart typ_wykresu , double bottomX, double topX, QString bottomY, QString topY);
 
 
 

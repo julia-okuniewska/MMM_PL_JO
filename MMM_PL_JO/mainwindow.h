@@ -37,14 +37,18 @@ public:
     bool czy_na_granicy = false;
 
 
-  QString textTransmitation;
+    double maksimum=0;
+    double minimum=0;
 
+
+  QString textTransmitation;
     void createTextTransmitation();
     void display_remarks();
     void prepareButtons();
     void sent_data();
     bool check_stability();
     void display_stability();
+    void czy_granica();
 
 
 private slots:
@@ -74,6 +78,9 @@ private slots:
 
 
     void on_lineEdit_6_cursorPositionChanged();
+
+    void on_maximum_time_textChanged();
+
 
 private:
     Ui::MainWindow *ui;
