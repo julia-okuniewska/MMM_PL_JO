@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->a0->setText("10");
     ui->b0->setText("10");
     ui->lineEdit_4->setText("0");
+    ui->lineEdit_6->setText("30");
+    ui->maximum_time->setText("100");
     display_stability();
 
 
@@ -111,6 +113,7 @@ void MainWindow::on_a1_textChanged()
     display_remarks();
     display_stability();
     createTextTransmitation();
+    matematyka.a_1= this->a_1;
     display_stability();
 
 }
@@ -135,6 +138,7 @@ void MainWindow::on_b1_textChanged()
     display_remarks();
     createTextTransmitation();
     matematyka.b_1 = this->b_1;
+    display_stability();
 }
 
 
@@ -146,6 +150,7 @@ void MainWindow::on_b0_textChanged()
     display_remarks();
     createTextTransmitation();
     matematyka.b_0 = this->b_0;
+    display_stability();
 
 }
 
@@ -153,7 +158,7 @@ void MainWindow::on_lineEdit_4_textChanged()
 {
     QString T_string = ui->lineEdit_4->text();
     bool convertOK;
-    T = T_string.toInt(&convertOK);
+    T = T_string.toDouble(&convertOK);
     display_remarks();
     createTextTransmitation();
 }
@@ -164,14 +169,17 @@ void MainWindow::on_pushButton_clicked()
     matematyka.typ_wejscia = 'r';               //INPUT RECTANGLE
     QLineSeries *dane =new QLineSeries();
     matematyka.wypelnij_macierze();
-    for (int i=0; i<max_time; i++)
+    double xfirst = -1*max_time/100;
+    dane->append(xfirst, 0);
+    dane->append(0, 0);
+    for (int i=0; i<matematyka.numberOfPoints; i++)
     {
-
-        dane->append(i, matematyka.rectangle1(i,'r'));
+        double j=i*matematyka.step;
+        dane->append(j, matematyka.rectangle1(j,'r'));
     }
 
     olchart->setData(WEJSCIE,dane);
-    olchart->ustawPrzedzialyWykresu(WEJSCIE,-1*max_time/100,max_time,-1.5, 1.5);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,xfirst,max_time,-1.5, 1.5);
 
 
 }
@@ -181,14 +189,17 @@ void MainWindow::on_pushButton_2_clicked()      //INPUT HEAVYSIDE
     matematyka.typ_wejscia = 'h';
     QLineSeries *dane =new QLineSeries();
     matematyka.wypelnij_macierze();
+    double xfirst = -1*max_time/100;
+    dane->append(xfirst, 0);
+    dane->append(0, 0);
     for (int i=0; i<matematyka.numberOfPoints; i++)
     {
        // double j=i/max_time;
-        double j=i;
-        dane->append(i, matematyka.rectangle1(i,'h'));
+        double j=i*matematyka.step;
+        dane->append(j, matematyka.rectangle1(j,'h'));
     }
     olchart->setData(WEJSCIE,dane);
-    olchart->ustawPrzedzialyWykresu(WEJSCIE,-1*max_time/100,max_time,-1.5, 1.5);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,xfirst,max_time,-1.5, 1.5);
 
 }
 
@@ -197,14 +208,17 @@ void MainWindow::on_pushButton_3_clicked()
     matematyka.typ_wejscia = 's';           //INPUD SINUS
     QLineSeries *dane =new QLineSeries();
     matematyka.wypelnij_macierze();
+    double xfirst = -1*max_time/100;
+    dane->append(xfirst, 0);
+    dane->append(0, 0);
     for (int i=0; i<matematyka.numberOfPoints; i++)
     {
-        double j=i;
-        dane->append(i, matematyka.rectangle1(i,'s'));
+        double j=i*matematyka.step;
+        dane->append(j, matematyka.rectangle1(j,'s'));
     }
 
     olchart->setData(WEJSCIE,dane);
-    olchart->ustawPrzedzialyWykresu(WEJSCIE,-1*max_time/100,max_time,-1.5, 1.5);
+    olchart->ustawPrzedzialyWykresu(WEJSCIE,xfirst,max_time,-1.5, 1.5);
 
 
 }
@@ -214,21 +228,25 @@ void MainWindow::on_pushButton_4_clicked()
 
     matematyka.wypelnij_macierze();         //OUTPUT
     matematyka.transformataOdwrotna();
-    T=T%100;
+
    // qDebug()<<"maksy = "<<maksimumY;
 
     olchartDolny = new olChart(WYJSCIE);
     QLineSeries *nowe =new QLineSeries();
-    for (int i=0; i< matematyka.max_time +T; i++)       // to samo dla numberOfPoints i ma_time...  DOŚĆ ZASTANAWIAJĄCE
+    double xfirst = -1*max_time/100;
+    nowe->append(xfirst, 0);
+    nowe->append(T, 0);
+    for (int i=0; i< matematyka.numberOfPoints; i++)       // to samo dla numberOfPoints i max_time...  DOŚĆ ZASTANAWIAJĄCE
     {
-        if(i<T)
-        nowe->append(i, 0);
-        else
-        nowe->append(i, matematyka.outputData[i-T]);
+        double j= i*matematyka.step+T;
+        nowe->append(j, matematyka.outputData[i]);
 
     }
+    maksimum = matematyka.checkMaksimum()*1.1;
+    minimum = matematyka.checkMinimum()*1.1;
+
     olchartDolny->setData(WYJSCIE,nowe);
-    olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, -1, max_time, matematyka.checkMinimum()*1.1, matematyka.checkMaksimum()*1.1);
+    olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, xfirst, max_time,minimum, maksimum );
     ui->graphicsView_2->setChart(olchartDolny);
     //qDebug()<<matematyka.outputData[0]<<matematyka.outputData[1]<<matematyka.outputData[2];
 
@@ -284,33 +302,27 @@ void MainWindow::sent_data()
 {
     //matematyka.T=T;
 
-    matematyka.Tin=Tin;
-    matematyka.max_time=max_time;
+    matematyka.Tin=this->Tin;
     olchartDolny->ustawPrzedzialyWykresu( WYJSCIE, -1*max_time/100, max_time, -1/maksimumY, maksimumY*1.05);
-    matematyka.a_0=a_0;
-    matematyka.a_1=a_1;
-    matematyka.b_0=b_0;
-    matematyka.b_1=b_1;
+    matematyka.a_0=this->a_0;
+    matematyka.a_1=this->a_1;
+    matematyka.b_0=this->b_0;
+    matematyka.b_1=this->b_1;
+    matematyka.max_time=this->max_time;
 }
 
 bool MainWindow::check_stability(){
-    if(a_0>0 && a_1>0)
-    {
+
+    if(a_0>=0 && a_1>=0)
         return true;
-    }
-    if(a_0==0 && a_1==0)
-    {
-        czy_na_granicy=true;
-        return true;
-    }
-    else {
-        return false;
-    }
+    return false;
+
+
 }
 
 void MainWindow::display_stability()
 {
-
+    czy_granica();
     QString stabilnosc;
     if(check_stability() && !czy_na_granicy)
     {
@@ -329,4 +341,25 @@ void MainWindow::display_stability()
     ui->stability->setText(stabilnosc);
 
 }
+
+
+void MainWindow::on_maximum_time_textChanged()
+{
+    QString max_time_string = ui->maximum_time->text();
+    bool convertOK;
+    max_time= max_time_string.toInt(&convertOK);
+    matematyka.max_time=this->max_time;
+}
+
+void MainWindow ::czy_granica()
+{
+    if(a_0==0 && a_1==0 && (b_0==0 || b_1==0))
+    {
+        czy_na_granicy=true;
+    }
+    else {
+        czy_na_granicy=false;
+    }
+}
+
 

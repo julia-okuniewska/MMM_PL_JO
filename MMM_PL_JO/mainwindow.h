@@ -30,21 +30,25 @@ public:
     int a_1 = startPoint
     int b_0 = startPoint
     int b_1 = startPoint
-    int T   = 0;
+    double T   = 0;
     int Tin = 10;
     double max_time = 100;
     double maksimumY=2;
     bool czy_na_granicy = false;
 
 
-  QString textTransmitation;
+    double maksimum=0;
+    double minimum=0;
 
+
+  QString textTransmitation;
     void createTextTransmitation();
     void display_remarks();
     void prepareButtons();
     void sent_data();
     bool check_stability();
     void display_stability();
+    void czy_granica();
 
 
 private slots:
@@ -74,6 +78,9 @@ private slots:
 
 
     void on_lineEdit_6_cursorPositionChanged();
+
+    void on_maximum_time_textChanged();
+
 
 private:
     Ui::MainWindow *ui;

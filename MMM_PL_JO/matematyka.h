@@ -33,6 +33,11 @@ public:
     double rectangle1 (double t, char wybrane_wejscie );
     double checkMaksimum();
     double checkMinimum();
+    QString notacja_wykladniczaMaks();
+    QString notacja_wykladniczaMin();
+
+    QString Smaksimum;
+    QString Sminimum;
 
     void amplitudeSpectrum();
     void phaseSpectrum();
@@ -55,12 +60,12 @@ public:
     QLineSeries *obliczaneDane;
 
 
-    const static int numberOfPoints = 1000;
+    const static int numberOfPoints = 10000;
     const double e = 2.72;         //liczba Eulera
     const double pi = 3.1415;        //liczba PI
-    int Tin=30;
+   int Tin=30;
     double max_time=100;
-    double step=0.1;
+    double step=max_time/numberOfPoints;
             //max_time/numberOfPoints;            //max_time/numberOfPoints;
     char typ_wejscia;
     double outputData[numberOfPoints];

@@ -26,7 +26,6 @@ int Matematyka::heavysideInput(double i)
 {
     if(i>0)
         return 1;
-    if(i==0.)
     return 0;
 }
 
@@ -97,6 +96,27 @@ double Matematyka::checkMaksimum()
         }
     }
     return maksimumY;
+}
+
+QString Matematyka::notacja_wykladniczaMaks()
+{
+    double maksimum= checkMaksimum();
+    if(maksimum< 1000)
+        return Smaksimum= QString::number(maksimum);
+    if(maksimum>1000 && maksimum<1000000)
+        return Smaksimum= QString::number(maksimum/1000)+"k";
+    if(maksimum<1000000)
+        return Smaksimum= QString::number(maksimum/1000000)+"G";
+}
+
+QString Matematyka::notacja_wykladniczaMin(){
+    double minimum= checkMinimum()*(-1);
+    if(minimum< 1000)
+        return Sminimum= QString::number(minimum*(-1));
+    if(minimum>1000 && minimum<1000000)
+        return Sminimum= QString::number(minimum/-1000)+"k";
+    if(minimum<1000000)
+        return Sminimum= QString::number(minimum/-1000000)+"G";
 }
 
 double Matematyka::checkMinimum()
@@ -259,7 +279,8 @@ void Matematyka::MatrixInverse (double (*inMatrix)[2],  double (*outMatrix)[2])
 void Matematyka::transformataOdwrotna()
 {
     for(int i=0; i<numberOfPoints; i++){
-        outputData[i]=wyliczanie_wyjscia(i);
+        double t= i*step;
+        outputData[i]=wyliczanie_wyjscia(t);
         //qDebug()<<outputData[i];
     }
 }
@@ -285,7 +306,7 @@ void Matematyka::wypelnijMacierzDX(double t)
 
 void Matematyka::calkowanie()
 {
-    MatrixConstMult(dxMatrix, step, TemporaryMatrix0);
+    MatrixConstMult(dxMatrix, 0.01, TemporaryMatrix0);
     MatrixAdd(TemporaryMatrix0, MatrixX, MatrixX);
 }
 
