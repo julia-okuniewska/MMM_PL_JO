@@ -290,10 +290,11 @@ void MainWindow::on_pushButton_6_clicked()
 
     if(matematyka.minimumRange>720)
     {
-    int range = int(((abs(matematyka.maksimumRange)+abs(matematyka.minimumRange)))/40);
-    olchartDolny->axisY->setTickCount(range+1);
+        int range = int(((abs(matematyka.maksimumRange)+abs(matematyka.minimumRange)))/40);
+        olchartDolny->axisY->setTickCount(range+1);
     }
-    else {
+    else
+    {
         olchartDolny->axisY->setTickCount(2);
     }
     ui->graphicsView_2->setChart(olchartDolny);    

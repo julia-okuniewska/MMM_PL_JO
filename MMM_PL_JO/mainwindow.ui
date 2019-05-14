@@ -382,7 +382,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>okres wejscia Tin</string>
+     <string>okres wejścia Tin</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="maximum_time">
@@ -424,7 +424,7 @@
      <x>0</x>
      <y>0</y>
      <width>1191</width>
-     <height>26</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

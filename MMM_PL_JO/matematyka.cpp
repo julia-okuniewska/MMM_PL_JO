@@ -51,24 +51,25 @@ double Matematyka::rectangle1 (double t, char wybrane_wejscie)
 
 double Matematyka::simpsonIntegration (double xlast)
 {
-    double xfirst, y, sum, dx, x;
-    xfirst=0;
-    y=0;
-    sum=0;
-    int N=200;
-    dx=(xlast-xfirst)/N;
-    for (int i=1; i<=N; i++)
-    {
-        x = xfirst + i*dx;
-       // sum += splotFun(x-dx/2);
-        if (i< N)
-        {
-          // y += splotFun(x);
-        }
-    }
-   // y = dx/6 * (splotFun(xfirst)+splotFun(xlast) + 2*y + 4*sum);
+//    double xfirst, y, sum, dx, x;
+//    xfirst=0;
+//    y=0;
+//    sum=0;
+//    int N=200;
+//    dx=(xlast-xfirst)/N;
+//    for (int i=1; i<=N; i++)
+//    {
+//        x = xfirst + i*dx;
+//       // sum += splotFun(x-dx/2);
+//        if (i< N)
+//        {
+//          // y += splotFun(x);
+//        }
+//    }
+//   // y = dx/6 * (splotFun(xfirst)+splotFun(xlast) + 2*y + 4*sum);
 
-    return y;
+//    return y;
+    return xlast;
 }
 
 
@@ -109,6 +110,8 @@ QString Matematyka::notacja_wykladniczaMaks()
         return Smaksimum= QString::number(maksimum/1000)+"k";
     if(maksimum<1000000)
         return Smaksimum= QString::number(maksimum/1000000)+"G";
+    else
+        return Sminimum= "error notacja wykladnicza";
 }
 
 QString Matematyka::notacja_wykladniczaMin(){
@@ -119,6 +122,8 @@ QString Matematyka::notacja_wykladniczaMin(){
         return Sminimum= QString::number(minimum/-1000)+"k";
     if(minimum<1000000)
         return Sminimum= QString::number(minimum/-1000000)+"G";
+    else
+        return Sminimum= "error notacja wykladnicza";
 }
 
 double Matematyka::checkMinimum()
@@ -141,13 +146,13 @@ void Matematyka::amplitudeSpectrum()
     obliczaneDane = new QLineSeries();
        std::complex<double> yValue;
        double amplitude;
-       for(double omega = 0.1; omega < 10000 ; omega *= 10){
-           for(double i = 1; i <10 ; i++){
-               yValue = transmitationFun(omega*i);
+       for(double omega = 0.1; omega < 10000 ; omega += 0.1){
+
+               yValue = transmitationFun(omega);
                amplitude = 20*log(abs(yValue));
-               obliczaneDane->append(omega*i,amplitude);
+               obliczaneDane->append(omega,amplitude);
                spectrumMaxMin(AMPLITUDE, amplitude);
-           }
+
        }
 }
 
@@ -163,10 +168,9 @@ void Matematyka::phaseSpectrum()
 
     std::complex<double> yValue;
     double argument;
-    for(double omega = 0.1; omega < 10000 ; omega *= 10){
-        for(double i = 1; i <10 ; i++)
-        {
-             yValue = transmitationFun(omega*i);
+    for(double omega = 0.1; omega < 10000 ; omega += 0.1){
+
+             yValue = transmitationFun(omega);
              argument = (atan2(yValue.imag(),yValue.real())*180)/M_PI;
 
              if(vecIterator != 0)
@@ -182,23 +186,15 @@ void Matematyka::phaseSpectrum()
                  {
                      przeskok = 0;
                  }
-
-
              }
-             qDebug()<<"argument przed "<<argument;
+
              argument = argument - odejmowane;
-             obliczaneDane->append(omega*i,argument);
-             qDebug()<<"odejmowane = "<<odejmowane;
+             obliczaneDane->append(omega,argument);
 
-             //tak, są
-            //   qDebug()<<"czy obliczane dane = "<<obliczaneDane->at(vecIterator)<<"sa rowne "<<unfolding->at(vecIterator);
-
-             qDebug()<<"dla omega = "<<omega*i<<"argument = "<< argument<<endl;
              spectrumMaxMin(PHASE,argument);
              vecIterator++;
-        }
+
     }
-    qDebug()<<endl<<endl<<endl;
 }
 
 void Matematyka::spectrumMaxMin(int type, double value)
