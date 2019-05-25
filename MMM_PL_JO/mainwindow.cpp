@@ -113,7 +113,7 @@ void MainWindow::on_a1_textChanged()
 {
     QString a_1_string = ui->a1->text();
     bool convertOK;
-    a_1 = a_1_string.toInt(&convertOK);
+    a_1 = a_1_string.toDouble(&convertOK);
     display_remarks();
     display_stability();
     createTextTransmitation();
@@ -126,7 +126,7 @@ void MainWindow::on_a0_textChanged()
 {
     QString a_0_string = ui->a0->text();
     bool convertOK;
-    a_0 = a_0_string.toInt(&convertOK);
+    a_0 = a_0_string.toDouble(&convertOK);
     display_remarks();
     display_stability();
     createTextTransmitation();
@@ -138,7 +138,7 @@ void MainWindow::on_b1_textChanged()
 {
     QString b_1_string = ui->b1->text();
     bool convertOK;
-    b_1 = b_1_string.toInt(&convertOK);
+    b_1 = b_1_string.toDouble(&convertOK);
     display_remarks();
     createTextTransmitation();
     matematyka.b_1 = this->b_1;
@@ -150,7 +150,7 @@ void MainWindow::on_b0_textChanged()
 {
     QString b_0_string = ui->b0->text();
     bool convertOK;
-    b_0 = b_0_string.toInt(&convertOK);
+    b_0 = b_0_string.toDouble(&convertOK);
     display_remarks();
     createTextTransmitation();
     matematyka.b_0 = this->b_0;
