@@ -26,10 +26,10 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    int a_0 = startPoint
-    int a_1 = startPoint
-    int b_0 = startPoint
-    int b_1 = startPoint
+    double a_0 = startPoint
+    double a_1 = startPoint
+    double b_0 = startPoint
+    double b_1 = startPoint
     double T   = 0;
     int Tin = 10;
     double max_time = 100;
