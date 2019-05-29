@@ -13,8 +13,21 @@ MainWindow::MainWindow(QWidget *parent) :
     prepareButtons();
     createTextTransmitation();
 
+    QDoubleValidator *validator = new QDoubleValidator();
+    validator->setLocale(QLocale::English);
+
     olchart = new olChart(WEJSCIE);
     ui->graphicsView->setChart(olchart);
+
+
+
+    ui->a0->setValidator(validator);
+    ui->a1->setValidator(validator);
+    ui->b0->setValidator(validator);
+    ui->b1->setValidator(validator);
+    ui->lineEdit_4->setValidator(validator);
+
+
     ui->a1->setText("10");
     ui->b1->setText("10");
     ui->a0->setText("10");
@@ -54,33 +67,33 @@ void MainWindow::createTextTransmitation()
 void MainWindow::display_remarks()
 {
 
-    QString mistake="bledne wspolczynniki:";
-    if(a_0==0)
-    {
-        mistake += " a0";
-    }
-    if(a_1==0)
-    {
-        mistake += " a1";
-    }
-    if(b_0==0)
-    {
-        mistake += " b0";
-    }
-    if(b_1==0)
-    {
-        mistake += " b1";
-    }
-    if(T==0.0)
-    {
-        mistake += " T";
-    }
-    ui->remarks->setText(mistake);
+//    QString mistake="bledne wspolczynniki:";
+//    if(a_0==0)
+//    {
+//        mistake += " a0";
+//    }
+//    if(a_1==0)
+//    {
+//        mistake += " a1";
+//    }
+//    if(b_0==0)
+//    {
+//        mistake += " b0";
+//    }
+//    if(b_1==0)
+//    {
+//        mistake += " b1";
+//    }
+//    if(T==0.0)
+//    {
+//        mistake += " T";
+//    }
+//    ui->remarks->setText(mistake);
 
-    if(a_0 != 0 && a_1 != 0 && b_0 != 0 && b_1 != 0 && T!=0.0)
+//    if(a_0 != 0 && a_1 != 0 && b_0 != 0 && b_1 != 0 && T!=0.0)
 
 
-        ui->remarks->setText(" ");
+//        ui->remarks->setText(" ");
 
 }
 
@@ -127,7 +140,9 @@ void MainWindow::on_a0_textChanged()
     QString a_0_string = ui->a0->text();
     bool convertOK;
     a_0 = a_0_string.toDouble(&convertOK);
-    display_remarks();
+    if (a_0_string != "0")
+        display_remarks();
+
     display_stability();
     createTextTransmitation();
     matematyka.a_0 = this->a_0;
