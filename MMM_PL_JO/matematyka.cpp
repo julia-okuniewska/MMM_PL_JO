@@ -78,12 +78,15 @@ std::complex<double> Matematyka::transmitationFun(double omega)
     std::complex<double> licznik;
     std::complex<double> mianownik;
     std::complex<double> j(0,1);
+    std::complex<double> jeden(1,0);
     std::complex<double> expo(e,0);
     licznik = b_1*j*omega + b_0;
     mianownik = j*j*omega*omega + a_1*j*omega+a_0;
 
+    std::complex<double> G;
+    G = (licznik/mianownik)*pow(e,(-j*omega*T));
 
-   return (licznik/mianownik)*pow(e,(-j*omega*T));
+   return G/(jeden-G);
 
 }
 
